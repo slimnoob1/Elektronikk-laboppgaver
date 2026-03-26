@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.3.26)  26 MAR 2026 15:10
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.3.26)  26 MAR 2026 18:39
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1220,7 +1220,7 @@ Package hyperref Info: Link coloring ON on input line 26.
 
 \c@lstlisting=\count517
  (frontpage.tex
-<Media/cisk.png, id=50, 1204.5pt x 2115.905pt>
+<Media/cisk.png, id=154, 1204.5pt x 2115.905pt>
 File: Media/cisk.png Graphic file (type png)
 <use Media/cisk.png>
 Package pdftex.def Info: Media/cisk.png  used on input line 4.
@@ -1277,19 +1277,19 @@ l.43 \clearpage
 
 ] (sections/instrumenter.tex) [2
 
-{C:/Users/LAB/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Users/LAB/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}] (sections/teori.tex) [3
+{C:/Users/LAB/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Users/LAB/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}] (sections/teori.tex [3
 
-] (sections/gjennomforing.tex) [4
+]) [4] [5] (sections/gjennomforing.tex) [6
 
-] (sections/diskusjon.tex) [5
+] (sections/diskusjon.tex) [7
 
-] (sections/konklusjon.tex) [6
+] (sections/konklusjon.tex) [8
 
 ]
 
 LaTeX Warning: Empty bibliography on input line 60.
 
-(sections/vedlegg.tex) [7
+(sections/vedlegg.tex) [9
 
 
 ] (main.aux)
@@ -1298,23 +1298,23 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 5582EB18C8C4659EF389A8842F6F7043;1309.
+(rerunfilecheck)             Checksum: 08EDDBB8199A398021C8E37CD10F6105;5456.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 60083 strings out of 467867
- 1380432 string characters out of 5419302
- 2499348 words of memory out of 5000000
- 88185 multiletter control sequences out of 15000+600000
+ 60144 strings out of 467867
+ 1381130 string characters out of 5419302
+ 2502348 words of memory out of 5000000
+ 88216 multiletter control sequences out of 15000+600000
  706476 words of font info for 130 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  132i,10n,135p,1003b,1753s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/LAB/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/LAB/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbxi10.pfb><C:/Users/LAB/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/LAB/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb>
-Output written on main.pdf (10 pages, 219634 bytes).
+<C:/Users/LAB/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/LAB/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbxi10.pfb><C:/Users/LAB/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/LAB/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/LAB/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb>
+Output written on main.pdf (12 pages, 252079 bytes).
 PDF statistics:
- 143 PDF objects out of 1000 (max. 8388607)
- 24 named destinations out of 1000 (max. 500000)
- 46698 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 295 PDF objects out of 1000 (max. 8388607)
+ 54 named destinations out of 1000 (max. 500000)
+ 46906 words of extra memory for PDF output out of 51595 (max. 10000000)
 
