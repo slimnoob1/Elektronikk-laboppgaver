@@ -1,0 +1,99 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{preamble}[2025/08/31 Rapport-preamble]
+
+% --- Grunnleggende ---
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[main=norsk,english]{babel}
+%\usepackage[provide=* norsk]{babel} %funket i Arch Linux med sudo pacman -S texlive
+% --------------------------------------------------
+\setlength{\parindent}{0pt}   % ingen innrykk
+\setlength{\parskip}{1em}     % legg inn luft mellom avsnitt
+
+
+% --- Matematikk ---
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm}
+
+% --- Kretser --- %
+\usepackage[siunitx]{circuitikz}
+
+% --- Skrifter og mikrotypografi ---
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% --- Grafikk og farger ---
+\usepackage{graphicx}
+\graphicspath{{Media/}}
+\usepackage[table]{xcolor}
+\usepackage{float}
+\usepackage{subcaption}
+
+% --- Struktur og lister ---
+\usepackage{enumitem}
+\usepackage{titlesec}
+
+% --- Litteratur ---
+\usepackage[backend=biber,style=ieee, sorting=none]{biblatex}
+\usepackage{csquotes}
+
+% --- Sideoppsett og enheter ---
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{siunitx}
+\sisetup{
+  number-unit-product={},
+  per-mode=symbol,
+  exponent-product=\cdot
+}
+
+% --- Innholdsfortegnelse og fysikknotasjon ---
+\usepackage{tocloft}
+\usepackage{physics}
+
+% --- Lenker (sist) ---
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  urlcolor=black,
+  citecolor=black
+}
+
+% --- Kollisjon \qty mellom physics og siunitx ---
+\usepackage{letltxmacro}
+\AtBeginDocument{\LetLtxMacro\qty\SI} % robust for pdfLaTeX-kjerner
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+
+% --- Små justeringer ---
+\emergencystretch=1em
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\setlist{nosep}
+
+% --- Bibliografi-fil ---
+\addbibresource{referanser.bib}
+
+%Maple kode
+\usepackage{listings}
+\usepackage{xcolor}
+
+
+
+\lstdefinelanguage{Maple}{
+  morekeywords={proc,local,return,end,if,then,else,elif,fi,for,do,od,while},
+  sensitive=true,
+  morecomment=[l]\#,
+  morestring=[b]",
+}
+
+\lstset{
+  language=Maple,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  stringstyle=\color{red!70!black},
+  showstringspaces=false,
+  breaklines=true,
+  frame=single,
+  columns=fullflexible
+}
+
