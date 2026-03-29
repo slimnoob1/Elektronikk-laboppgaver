@@ -1,26 +1,53 @@
 \section{Teori}
     \subsection{Halvlederdiode}
-        \subsubsection{Oppbygning og virkemåte}
-            PN-overgang, lederretning, sperreretning
+        En halvlederdiode er en elektronisk komponent som tillater strøm å flyte i én retning, mens den blokkerer strøm i motsatt retning. Den er laget av halvledermaterialer som silisium (Si) eller germanium (Ge), og benyttes blant annet til å omforme vekselstrøm til likestrøm samt i behandling av elektriske signaler, som deteksjon og modulasjon \cite{snl_halvlederdiode}.
 
-        \subsubsection{Strøm-spenningkarakteristikk}
-            Fremoverbias, bakoverbias, terskelspenning
+            \subsubsection{Virkemåte}
+                Dioden består som nevnt av to halvledermaterialer, hvor det ene er n-type med elektroner som ladningsbærere, og det andre er p-type med elektronhull som ladningsbærere. Et n-type materiale har et overskudd av frie elektroner som ladningsbærere, mens et p-type materiale har et overskudd av hull, som oppfører seg som positive ladningsbærere.
 
+                Når disse to halvlederne settes sammen, dannes det et grensesjikt (\textit{depletion region}) mellom materialene hvor det oppstår en isolerende barriere. Dette skjer fordi elektroner fra n-type materialet og hull fra p-type materialet rekombinerer og nøytraliserer hverandre. Som følge av dette finnes det ingen frie ladningsbærere i dette området, og strøm kan derfor ikke flyte gjennom dioden.
+
+                Hvorvidt dioden leder strøm når en spenningskilde kobles til, avhenger av hvordan spenningen påtrykkes.
+
+                Dersom den negative polen kobles til n-type siden og den positive polen til p-type siden, vil elektronene bli frastøtt fra den negative polen og bevege seg mot p-type siden. Dette fører til at strøm kan flyte gjennom dioden. Det er dette som heretter kalles lederetning (\textit{forward bias}).
+
+                Dersom polariteten snus, slik at den negative polen kobles til p-type siden, vil ladningsbærerne trekkes bort fra grensesjiktet. Dette fører til at barrieren øker, og dioden sperrer for strøm. Det er dette som heretter kalles sperreretning (\textit{reverse bias}).
+
+                For at dioden skal lede strøm, må spenningen over dioden, $V_D$, være større eller like terskelspenningen, $V_T$. For silisiumdioder er denne typisk i området $0.5-0.7V$. Når denne spenningen nås, begynner dioden å lede strøm. Årsaken til terskelspenningen er at ladningsbærerne må ha tilstrekkelig energi til å passere barrieren i grensesjiktet.
+
+                Dersom spenningen over dioden er negativ, vil den sperre helt til spenningen når sammenbruddsspenningen (\textit{breakdown voltage}), $V_{BV}$ \cite{snl_diode}.
+
+                Figur~\ref{silicone_diode_characteristics} viser viser strøm--spenningskarakteristikken til en silisiumdiode. Når spenningen over dioden er positiv ($V_D>0$), befinner dioden seg i lederretning, og strømmen $I_D$ øker raskt etter at terskelspenningen på omtrent $0.7V$ er nådd. Før denne spenningen er strømmen svært liten. Når spenningen er negativ ($V_D < 0$), er dioden i sperreretning, og det går kun en svært liten lekkasjestrøm $I_S$. 
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics{Media/silicone_diode_characteristics.PNG}
+                    \caption{Silikondiode karakteristikk}
+                    \label{silicone_diode_characteristics}
+                \end{figure}
     \subsection{Zenerdiode}
-        \subsubsection{Virkemåte}
-            Leder i bakoverretning ved zenerspenning
-        \subsubsection{Paramtere}
-            Zenerspenning, effekt, strømområde
-
+        En zenerdiode er en type halvlederdiode som kan lede strøm både i lederetning og i sperreretning. Den er konstruert slik at den begynner å lede kraftig i sperreretningen når spenningen når en bestemt verdi, kalt zenerspenningen. Dette fenomenet kalles zenereffekten. I lederetning oppfører zenerdioden seg på samme måte som en vanlig diode \cite{snl_zenerdiode}.
+        
         \subsubsection{BZX55/C6V8}
-            Se oppgavetekst!
+            BZX55/C6V8 er en zenerdiode som er designet for spenningsstabilisering i elektroniske kretser. Den tåler en effekt på maksimalt $500mW$. Zenerspenningen $V_z$ ligger i området $6.4<V_z<7.2V$ ved en målt med en strøm på $I_z = 5mA$. Maksimal spenning i lederetning er $V_F = 1.0V$, som gjelder ved en strøm på $I_F = 100mA$ \cite{bzx55}.
 
     \subsection{Vekselstrøm}
+        Vekselstrøm er elektrisk strøm som skifter retning periodisk, slik at det i gjennomsnitt går like mye strøm i begge retninger langs en leder \cite{vekselstrom}.
+
+    \subsection{Vekselspenning}
+        Vekselspenning er en elektrisk spenning som varierer periodisk med tiden, slik at polariteten er avvekslende positiv og negativ \cite{vekselsspenning}.
+
     \subsection{Klippekretser}
-        \subsection{Klipping med en diode}
+    Klippekretser er kretser som benytter dioder til å fjerne deler av et inngangssignal uten å forvrenge den gjenværende delen av bølgeformen \cite{electronic_devices_and_circuit_theory}.
 
-        \subsection{Klipping med to dioder}
-
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.8\textwidth]{Media/clipper2.PNG}
+            \caption{Eksempel på en klippekrets}
+            \label{clipper_circuit_example}
+        \end{figure}
+    
+    Figur \ref{clipper_circuit_example} viser en enkel klippekrets bestående av en diode og en motstand. Inngangssignalet $v_i$ er et vekselspenningssignal som varierer mellom positive og negative verdier med periode $T$. Når inngangsspenningen er positiv, leder dioden og signalet overføres til utgangen $v_o$. Når inngangsspenningen er negativ, sperrer dioden, og utgangsspenningen blir tilnærmet null. Resultatet er at den negative delen av signalet i andre halvperiode blir klippet bort, mens den positive delen i første halvperiode beholdes.
+        
     \subsection{Likeretting}
         \subsubsection{Enveis likeretter}
             Funksjon, utgangssignal
@@ -32,12 +59,6 @@
             \begin{align}
                 V_{DC} = \frac{2V_{peak}}{\pi}
             \end{align}
-    \subsection{Ripple}
-        Hva er ripple?
-        \subsubsection{Årsak til ripple}
-        \subsubsection{Redusere ripple}
-            Kondensator filter
-        \subsubsection{Ripple-faktor}
     \subsection{Forhåndsberegninger}
         \subsubsection{Enkel klippekrets}
 

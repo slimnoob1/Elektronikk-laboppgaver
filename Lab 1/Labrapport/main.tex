@@ -1,7 +1,29 @@
 \documentclass[12pt,a4paper]{article}
 \usepackage{preamble}
 \usepackage[backend=biber]{biblatex}
-\addbibresource{referanser.bib} % Make sure this matches your .bib file name
+
+\DeclareFieldFormat[online]{title}{«#1.»}
+\DeclareFieldFormat{url}{\url{#1}}
+
+\DefineBibliographyStrings{norsk}{
+  urlseen = {}
+}
+
+\DeclareBibliographyDriver{online}{%
+  \printnames{author}%
+  \adddot\space
+  \printfield{title}%
+  \space
+  \printlist{organization}%
+  \adddot\space
+  Hentet fra:\space
+  \printfield{url}%
+  \space
+  (Lastet ned:\space \printurldate)%
+  \finentry
+}
+
+\addbibresource{referanser.bib}
 
 % ------ Metadata ------
 \newcommand{\institution}{FHS/Cyberingeniørskolen}
