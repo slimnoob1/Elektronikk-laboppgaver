@@ -65,6 +65,32 @@
         \subsubsection{Utvidet klippekrets}
 
         \subsubsection{Klippekrets med zenerdioder}
+            \begin{figure}[H]
+                \centering
+                \resizebox{1\textwidth}{!}{%
+                \begin{circuitikz}
+                \tikzstyle{every node}=[font=\fontsize{8.0pt}{10.4pt}\selectfont]
+                \draw (5,8.625) to[sinusoidal voltage source, sources/symbol/rotate=auto,l={ \fontsize{8.0pt}{10.4pt}\selectfont $V1~20V_{pp}$}] (5,7.375);
+                \draw (7.5,10.5) to[R,l={ \fontsize{8.0pt}{10.4pt}\selectfont $R_1~180\Omega$}] (8.75,10.5);
+                \draw (11.25,8.5) to[empty Zener diode,l={ \fontsize{8.0pt}{10.4pt}\selectfont $D_4~C4V7$}] (11.25,10);
+                \draw (11.25,7.5) to[empty Zener diode] (11.25,6);
+                \draw (5,5.5) to[short] (11.25,5.5);
+                \draw (5,9.25) to[short] (5,10.5);
+                \draw (5,10.5) to[short] (7.5,10.5);
+                \draw (8.75,10.5) to[short] (11.25,10.5);
+                \draw (11.25,10.5) to[short] (11.25,10);
+                \draw (11.25,8.5) to[short] (11.25,7.5);
+                \draw (11.25,6) to[short] (11.25,5.5);
+                \draw (5,5.5) to[short] (5,7.5);
+                \draw (5,8.625) to[short] (5,9.375);
+                \draw [-{Stealth[scale=1.5]}, ] (12.5,5.5) -- (12.5,10.375);
+                \node [font=\fontsize{8.0pt}{10.4pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (10.25,6.75) {$D_5~C6V8$};
+                \node [font=\fontsize{8.0pt}{10.4pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (13,7.75) {$V_{ut}$};
+                \end{circuitikz}
+                }%
+                \caption{Klippekrets med zenerdioder}
+                \label{fig:klippekrets_zenerdioder}
+            \end{figure}
 
         \subsubsection{Krets for enveis likeretting}
 
