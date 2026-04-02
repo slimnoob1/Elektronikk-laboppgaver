@@ -61,6 +61,13 @@
             \end{align}
     \subsection{Forhåndsberegninger}
         \subsubsection{Enkel klippekrets}
+            I figur~\ref{fig:enkel_klippekrets} er det illustrert en enkel klippekrets som brukes til å undersøke hvordan spenningen over en diode varierer i en AC-krets. Kretsen består av en sinusformet spenningskilde $V1$ på $20V$ \textit{peak-to-peak}, altså med en amplitude på $10V$ varierende fra $\pm10V$,
+            en motstand $R1$ på $180\Omega$ og en silisiumdiode $D3$ (1N4148), alle koblet i serie.
+
+            Når spenningskilden er i den positive halvperioden, opererer dioden i \textit{forward bias} når spenningen over dioden overstiger ca. $0.7V$. Dioden leder da strøm, og spenningen over dioden holder seg tilnærmet konstant rundt $0.7V$. Resten av spenningen fra kilden faller over motstanden $R1$. 
+
+            Under den negative halvperioden opererer dioden i \textit{reverse bias} og sperrer strømmen fra å gå den retningen. Det går da tilnærmet ingen strøm i kretsen, og spenningsfallet over motstanden blir null. Dermed vil hele inngangssignalet fra $V1$ legge seg over dioden.
+
             \begin{figure}[H]
                 \centering
                 \includegraphics[width=0.7\textwidth]{Media/klippekrets.png}
@@ -68,6 +75,33 @@
                 \label{fig:enkel_klippekrets}
             \end{figure}
 
+            Den positive halvperioden av inngangssignalet undersøkes først. I intervallet fra $0V$ til $0.7V$ er det en åpen krets fordi dioden ikke opererer. Det går det ingen strøm i kretsen. Bruker man Kirchhoff's spenningslov i retning med klokken får man følgende uttrykk:
+            \begin{align}
+                -V1 + V_{R1} + V0 &= 0 \notag \\
+                V0 &= V1 - V_{R1} \notag \\
+                V0 &= V1 - R1\times I \notag \\
+                V0 &= V1 \label{eq:enkel_klippekrets1}
+            \end{align}
+
+            Fra $0.7V$ opp til $10V$ og ned igjen til $0.7V$ er spenningen over dioden konstant lik $0.7V$. Dette skyldes diodes karakteristikk. Dette medfører altså at
+            \begin{align}
+                V0 = 0.7V \label{eq:enkel_klippekrets2}
+            \end{align}
+
+            Fra $0.7V$ og ned til $0V$ er det tilsvarende tilstand som i \eqref{eq:enkel_klippekrets1}. Det er åpen krets og ingen strøm går i kretsen, slik at
+            \begin{align}
+                V0=V1
+            \end{align}
+
+            I den negative halvperioden til $V1$ så opererer dioden i \textit{reverse bias}, det er da åpen krets og det går ingen strøm i kretsen. Da gjelder
+            \begin{align*}
+                V0=V1
+            \end{align*}
+
+            Spenningsgrafen til $V0$ illustreres i figur~\ref{fig:python_enkel_klippekrets}. Man ser da at spenningen klippes ved $0.7V$ i positiv halvperiode av innsignalet. For enkelthetens skyld er innsignalet $V1$ i figur~\ref{fig:python_enkel_klippekrets} gitt ved
+            \begin{align*}
+                V1 = 10 \sin\left(\frac{2\pi t}{T}\right), \ T=1
+            \end{align*}
             \begin{figure}[H]
                 \centering
                 \includegraphics[width=0.7\textwidth]{Media/python_enkel_klippekrets.png}
@@ -75,12 +109,23 @@
                 \label{fig:python_enkel_klippekrets}
             \end{figure}
         \subsubsection{Utvidet klippekrets}
+            I figur~\ref{fig:utvidet_klippekrets} er det illustrert en utvidet klippekrets som brukes til å undersøke hvordan spenningen over en to dioder i parallell varierer i en AC-krets. Kretsen består av en sinusformet spenningskilde $V1$ på $20V$ \textit{peak-to-peak},
+            en motstand $R1$ på $180\Omega$ og to silisiumdioder $D3$ og $D5$ koblet i parallell, men med motstatt polaritet. 
+
+            De to diodene fungerer som en klippekrets. Siden diodene er koblet i motsatt retning, vil kun en diode lede under positiv halvperiode og den andre lede under negativ halvperiode.
+
+            Når inngangsspenningen er positiv og overstiger $0.7V$, vil diode $D3$ operere i \textit{forward bias} og begynne å lede, mens $D5$ vil operere i \textit{reverse bias} og sperre strøm fra å gå den retningen. Spenningen $V0$ over parallellen vil da være $0.7V$, mens resten av spenningen faller over $R1$.
+            Det tilsvarende vil skje i negativ halvperiode, bare motsatt. $D5$ vil lede strøm når spenningen fra $V1$ går under $-0.7V$. $D3$ vil operere i \textit{reverse bias} og sperre strømmen fra å gå den retningen. Spenningen $V0$ over parallellen vil konstant være $-0.7V$.
+            
             \begin{figure}[H]
                 \centering
                 \includegraphics[width=0.7\textwidth]{Media/utvidet_klippekrets.png}
                 \caption{Utvidet klippekrets}
                 \label{fig:utvidet_klippekrets}
             \end{figure}
+
+            Resultatet som illustrert i figur~\ref{fig:python_utvidet_klippekrets} er at spenningen over henholdsvis $D3$ og $D5$ blir klippet på begge sider, slik at den positive og den negative delen av sinuskurven begrenses til omtrent $\pm 0.7V$.
+
 
             \begin{figure}[H]
                 \centering
@@ -90,6 +135,11 @@
             \end{figure}
 
         \subsubsection{Klippekrets med zenerdioder}
+
+            I figur~\ref{fig:klippekrets_zenerdioder} er det vist en diodekrets med to zenerdioder. Kretsen består av en sinusformet spenningskilde $V1$ på $20V$ \textit{peak-to-peak}, en motstand $R1$ på $180\Omega$ og to zenerdioder $D4$ (C4V7) og $D5$ (C6V8) med henholdsvis zenerspenninger $V_z$ på $4.7V$ og $6.8V$, koblet i serie med motsatt polaritet.
+
+            De to zenerdiodene er koblet slik at én diode vil arbeide i zenerområdet (\textit{reverse bias}), mens den andre vil operere som en vanlig diode i \textit{forward bias}, avhengig av hvilken halvperiode av signalet som $V1$ er i.
+
             \begin{figure}[H]
                 \centering
                 \resizebox{0.7\textwidth}{!}{%
@@ -115,6 +165,43 @@
                 }%
                 \caption{Klippekrets med zenerdioder}
                 \label{fig:klippekrets_zenerdioder}
+            \end{figure}
+
+            Den positive halvperioden undersøkes først. Helt frem til $V_z$ for $D4$ er det åpen krets og det vil ikke gå noen strøm i kretsen. Når spenningen når $4.7V$, vil $D4$ gå i zenerbrudd på $4.7V$ og lede strøm, mens den andre dioden leder ikke framover før spenningen har økt med $0.7V$ ytterligere. Siden $V_{ut}$ måles nedenfra og opp, vil spenningen $V_{ut}$ være lik
+            \begin{align*}
+                V_{ut} = -V1
+            \end{align*}
+            helt frem til spenningen fra $V1$ er lik $5.4V$. Når $D4$ er i \textit{reverse bias} og $D5$ i \textit{forward bias}, altså når spenningen fra $V1$ går fra $5.4V$ opp til $10V$ og ned igjen til $5.4V$, vil $V_{ut}$ være lik:
+            \begin{align*}
+                V_{ut} = -(4.7V + 0.7V) = -5.4V
+            \end{align*}
+
+            Når $V1$ går fra $5.4V$ ned til $0V$ vil $V_{ut}$ fortsatt være lik $-V1$. 
+
+            I den negative halvperioden vil $D5$ operere i \textit{reverse bias} når den har nått zenerspenningen på $6.8V$, og $D3$ operere i \textit{forward bias} når spenningen har økt ytterligere med $0.7V$. Slik at fra $0V$ og ned til $-7.5V$ er
+            \begin{align*}
+                V_{ut} = -V1
+            \end{align*}
+
+            Fra $-7.5V$ ned til $-10V$ og opp igjen til $-7.5V$ vil $V_{ut}$ finnes ut ved å bruke Kirchhoff's spenningslov:
+            \begin{align*}
+                &-V_{ut} + 6.8V + 0.7V = 0 \\
+                &V_{ut} = 7.5V 
+            \end{align*}
+
+            Når spenningen fra $V1$ stiger opp mot $0V$ vil $V_{ut}$ være lik
+
+            \begin{align*}
+                V_{ut} = -V1
+            \end{align*}
+
+            Resultatene og grafen for $V_{ut}$ vises i figur~\ref{fig:python_klippekrets_zenerdioder}. Spenningen $V_{ut}$ klippes assymmetrisk, da i den positive halvperioden klippes spenningen $V_{ut}$ til $-5.4V$ og i den negative halvperioden klippes spenningen til $7.5V$.
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=1\textwidth]{Media/python_klippekrets_zenerdioder.png}
+                \caption{Graf for $V_{ut}$ og $V1$}
+                \label{fig:python_klippekrets_zenerdioder}
             \end{figure}
 
         \subsubsection{Krets for enveis likeretting}

@@ -28,7 +28,7 @@ mask1 = t <= T/2
 mask2 = t > T/2
 
 # V0: stiplet hele veien
-plt.plot(t[mask1], V0[mask1], color='red', linestyle='--', label='V0 (over dioden D3)')
+plt.plot(t[mask1], V0[mask1], color='red', linestyle='--', label='V0 (over parallellen)')
 plt.plot(t[mask2], V0[mask2], color='red', linestyle='--')
 
 # Legg til ±0.7 som ticks og fjern 0
