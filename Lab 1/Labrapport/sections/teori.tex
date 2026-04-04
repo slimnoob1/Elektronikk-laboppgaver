@@ -52,12 +52,12 @@
         \subsubsection{Enveis likeretter}
             Funksjon, utgangssignal
             \begin{align}
-                V_{DC} = \frac{V_{peak}}{\pi}
+                V_{DC} = \frac{V_{peak}}{\pi} \label{eq:enveis_likeretter_DC}
             \end{align}
         \subsubsection{Toveis likeretter}
             Funksjon, begge halvperioder utnyttes
             \begin{align}
-                V_{DC} = \frac{2V_{peak}}{\pi}
+                V_{DC} = \frac{2V_{peak}}{\pi} \label{eq:toveis_likeretter_DC}
             \end{align}
     \subsection{Forhåndsberegninger}
         \subsubsection{Enkel klippekrets}
@@ -205,6 +205,13 @@
             \end{figure}
 
         \subsubsection{Krets for enveis likeretting}
+            I figur~\ref{fig:enveis_likeretter} illustreres en enveis likeretter. Kretsen består av en spenningskilde $V2$, en diode ($D15$) og en motstand $R2$ med motstand $1k\Omega$ i serie.
+
+            Når inngangsspenningen er positiv, blir opererer dioden i \textit{forward bias} og leder strøm. Det går da strøm gjennom motstanden, og spenningen over $R2$ følger tilnærmet den positive delen av sinuskurven, kun subtrahert med et spenningsfall på omtrent $0.7V$ fra dioden.
+
+            Når inngangsspenningen er negativ, blir opererer dioden i \textit{reverse bias} og sperrer. Det går da ingen strøm i kretsen, og spenningen over motstanden blir tilnærmet null.
+
+            Resultatet er at bare den positive halvperioden av signalet slipper gjennom, mens den negative delen fjernes.
             \begin{figure}[H]
                 \centering
                 \includegraphics[width=0.7\textwidth]{Media/enveis_likeretting.png}
@@ -212,9 +219,409 @@
                 \label{fig:enveis_likeretter}
             \end{figure}
 
+            For å finne den gjennomsnittlige DC-spenningen over motstanden $R2$ kan man bruke likning \eqref{eq:enveis_likeretter_DC} samt Kirchhoff's spenningslov rundt kretsen. Dette gir da følgende:
+            \begin{align*}
+                -10V + 0.7V + V_{R2} &= 0 \\
+                V_{R2} &= 9.3V\\
+                \implies V_{DC} &=\frac{V_{R2}}{\pi}=\frac{9.3V}{\pi} = 2.96V
+            \end{align*}
+
+            Når det gjelder kretsen i figur~\ref{fig:flip_diode_enkel_likeretter} så fungerer den nesten akkurat på samme måte som kretsen i figur~\ref{fig:enveis_likeretter}, bare at dioden her er snudd vei på. Slik at når spenningen fra $V2$ er negativ så operer dioden i \textit{forward bias}.
+
+            \begin{figure}[H]
+                \centering
+                \resizebox{0.7\textwidth}{!}{%
+                \begin{circuitikz}
+                \tikzstyle{every node}=[font=\fontsize{10.8pt}{14.1pt}\selectfont]
+                \draw (12.5,14) to[D,l={ \fontsize{10.8pt}{14.1pt}\selectfont D15}] (10,14);
+                \draw (12.5,14) to[short] (13.75,14);
+                \draw (13.75,14) to[R,l={ \fontsize{10.8pt}{14.1pt}\selectfont R2}] (13.75,10.25);
+                \draw (10,10.25) to[short] (13.75,10.25);
+                \draw (10,14) to[short] (8.75,14);
+                \draw (8.75,14) to[sinusoidal voltage source, sources/symbol/rotate=auto,l={ \fontsize{10.8pt}{14.1pt}\selectfont \textbf{V2}}] (8.75,10.25);
+                \draw (8.75,10.25) to[short] (10.125,10.25);
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (7.625,12.125) {20Vpp};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (11.375,14.625) {D1N4148};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (13,12.125) {1k$\Omega$};
+                \end{circuitikz}
+                }%
+                \caption{Dioden byttet vei: enkel likeretter}
+                \label{fig:flip_diode_enkel_likeretter}
+            \end{figure}
+
+            Bruker man igjen Kirchhoff's spenningslov og likning \eqref{eq:enveis_likeretter_DC} får man følgende gjennomsnittlige DC-spenning over motstanden $R2$:
+            \begin{align*}
+                -10V - V_{R2} + 0.7V &= 0 \\
+                V_{R2} &= -9.3V \\
+                \implies V_{DC} &= \frac{V_{R2}}{\pi} =\frac{-9.3V}{\pi} = -2.96V
+            \end{align*}
+
         \subsubsection{Krets for toveis likeretting}
+            Kretsen i figur \ref{fig:brokobling} er en toveis likeretter med dioder koblet i en brokobling. Denne omformer vekselspenning til pulserende likespenning. Kretsen består av en spenningskilde $V2$, fire dioder (D1-D4) koblet i bro, og en lastmotstand $R4$ på $1k\Omega$.
+            \begin{figure}[H]
+                \centering
+                \resizebox{0.7\textwidth}{!}{%
+                \begin{circuitikz}
+                \tikzstyle{every node}=[font=\fontsize{10.8pt}{14.1pt}\selectfont]
+                \draw (13.75,11.5) to[short] (17.5,11.5);
+                \draw (17.5,7.75) to[R,l={ \fontsize{10.8pt}{14.1pt}\selectfont R4}] (17.5,11.5);
+                \draw (12.5,10.25) to[short] (12.5,9);
+                \draw (12.5,9) to[short] (8.75,9);
+                \draw (11.25,11.5) to[short] (10,11.5);
+                \draw (10,11.5) to[short] (10,9.375);
+                \draw (10,9.375) to[short] (9.5,9.375);
+                \draw (9.5,9.375) to[short] (9.5,8.625);
+                \draw (9.5,8.625) to[short] (10,8.625);
+                \draw (10,8.625) to[short] (10,7.75);
+                \draw (10,7.75) to[short] (17.5,7.75);
+                \draw (8.75,9) to[short] (7.5,9);
+                \draw (12.5,12.75) to[short] (12.5,14);
+                \draw (12.5,14) to[short] (7.5,14);
+                \draw (7.5,9) to[sinusoidal voltage source, sources/symbol/rotate=auto,l={ \fontsize{10.8pt}{14.1pt}\selectfont V2}] (7.5,14);
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (6.75,11) {20Vpp};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (16.75,9.25) {1k$\Omega$};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (11.5,12.5) {D1};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (13.5,12.5) {D2};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (11.375,10.625) {D4};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (13.625,10.625) {D3};
+                \draw (12.5,12.75) to[D] (13.75,11.5);
+                \draw (11.25,11.5) to[D] (12.5,10.25);
+                \draw (12.5,12.75) to[D] (11.25,11.5);
+                \draw (13.75,11.5) to[D] (12.5,10.25);
+                \end{circuitikz}
+                }%
+                \caption{Toveis likeretter}
+                \label{fig:brokobling}
+            \end{figure}
+
+            I figur \ref{fig:toveis_positiv} og \ref{fig:toveis_negativ} ser man likeretteren under henholdsvis positiv og negativ periode. Under positiv halvperiode så vil kun to dioder lede strømmen i en bestemt retning, som i dette tilfelle er fra opp til ned. 
+            Strømmen ønsker å gå fra høyere potensiale til lavere potensiale, slik at den velger å gå gjennom diodene $D2$ og $D4$. $D1$ og $D3$ opererer da i \textit{reverse bias} og sperrer strømmen fra å gå gjennom dem. Under negativ halvperiode leder diodene $D1$ og $D3$ og strømmen følger retningen som skissert i figur \ref{fig:toveis_negativ}.
+
+            \begin{figure}[H]
+                \centering
+                \resizebox{0.7\textwidth}{!}{%
+                \begin{circuitikz}
+                \tikzstyle{every node}=[font=\fontsize{10.8pt}{14.1pt}\selectfont]
+                \draw (13.75,11.5) to[short] (17.5,11.5);
+                \draw (17.5,7.75) to[R,l={ \fontsize{10.8pt}{14.1pt}\selectfont R4}] (17.5,11.5);
+                \draw (12.5,10.25) to[short] (12.5,9);
+                \draw (12.5,9) to[short] (8.75,9);
+                \draw (11.25,11.5) to[short] (10,11.5);
+                \draw (10,11.5) to[short] (10,9.375);
+                \draw (10,9.375) to[short] (9.5,9.375);
+                \draw (9.5,9.375) to[short] (9.5,8.625);
+                \draw (9.5,8.625) to[short] (10,8.625);
+                \draw (10,8.625) to[short] (10,7.75);
+                \draw (10,7.75) to[short] (17.5,7.75);
+                \draw (8.75,9) to[short] (7.5,9);
+                \draw (12.5,12.75) to[short] (12.5,14);
+                \draw (12.5,14) to[short] (7.5,14);
+                \draw (7.5,9) to[sinusoidal voltage source, sources/symbol/rotate=auto,l={ \fontsize{10.8pt}{14.1pt}\selectfont V2}] (7.5,14);
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (6.75,11) {20Vpp};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (16.75,9.25) {1k$\Omega$};
+                %\node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (13.5,12.5) {D2};
+                %\node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (11.375,10.625) {D4};
+                \draw (12.5,12.75) to[D] (13.75,11.5);
+                \draw (11.25,11.5) to[D] (12.5,10.25);
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.000cm] at (7.25,12.125) {+};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.000cm] at (7.25,10.625) {-};
+                \draw (13.75,11.5) to[short, -o] (13.25,11) ;
+                \draw (12.5,10.25) to[short, -o] (13,10.75) ;
+                \draw (11.25,11.5) to[short, -o] (11.75,12) ;
+                \draw (12.5,12.75) to[short, -o] (12,12.25) ;
+                \draw (14.25,12.75) to[short, -o] (14.25,12.75) ;
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (8.5,13.75) -- (11,13.75);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (12.25,13.75) -- (12.25,13);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (12.5,12.375) -- (13.125,11.75);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (14.5,11.375) -- (16.125,11.375);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (17.25,11) -- (17.25,10.25);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (17.25,8.875) -- (17.25,8.25);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (15.625,7.875) -- (13.125,7.875);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (10.125,8) -- (10.125,8.5);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (10.125,9.625) -- (10.125,10.5);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (10.375,11.375) -- (11,11.375);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (11.875,11.375) -- (12.5,10.75);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (12.25,10.125) -- (12.25,9.25);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (11.625,9.25) -- (10.375,9.25);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (8.875,9.25) -- (7.875,9.25);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (7.625,9.75) -- (7.625,10.875);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (7.625,12.375) -- (7.625,13.5);
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, color={rgb,255:red,255; green,0; blue,0}, text opacity=1, , inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.000cm] at (9.75,13.5) {I};
+                \end{circuitikz}
+                }%
+                \caption{Toveis likeretter i positiv periode}
+                \label{fig:toveis_positiv}
+            \end{figure}
+
+            \begin{figure}[H]
+                \centering
+                \resizebox{0.7\textwidth}{!}{%
+                \begin{circuitikz}
+                \tikzstyle{every node}=[font=\fontsize{10.8pt}{14.1pt}\selectfont]
+                \draw (13.75,11.5) to[short] (17.5,11.5);
+                \draw (17.5,7.75) to[R,l={ \fontsize{10.8pt}{14.1pt}\selectfont R4}] (17.5,11.5);
+                \draw (12.5,10.25) to[short] (12.5,9);
+                \draw (12.5,9) to[short] (8.75,9);
+                \draw (11.25,11.5) to[short] (10,11.5);
+                \draw (10,11.5) to[short] (10,9.375);
+                \draw (10,9.375) to[short] (9.5,9.375);
+                \draw (9.5,9.375) to[short] (9.5,8.625);
+                \draw (9.5,8.625) to[short] (10,8.625);
+                \draw (10,8.625) to[short] (10,7.75);
+                \draw (10,7.75) to[short] (17.5,7.75);
+                \draw (8.75,9) to[short] (7.5,9);
+                \draw (12.5,12.75) to[short] (12.5,14);
+                \draw (12.5,14) to[short] (7.5,14);
+                \draw (7.5,9) to[sinusoidal voltage source, sources/symbol/rotate=auto,l={ \fontsize{10.8pt}{14.1pt}\selectfont V2}] (7.5,14);
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (6.75,11) {20Vpp};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (16.75,9.25) {1k$\Omega$};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.000cm] at (7.25,12.125) {-};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.000cm] at (7.25,10.625) {+};
+                \draw (14.25,12.75) to[short, -o] (14.25,12.75) ;
+                \draw (12.5,10.25) to[D] (13.75,11.5);
+                \draw (11.25,11.5) to[D] (12.5,12.75);
+                \draw (11.25,11.5) to[normal open switch] (12.5,10.25);
+                \draw (12.5,12.75) to[normal open switch] (13.75,11.5);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (7.75,10.875) -- (7.75,9.375);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (12.625,10.875) -- (13.25,11.5);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (14.375,11.25) -- (16.375,11.25);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (17.125,10.875) -- (17.125,10.25);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (17.125,8.75) -- (17.125,8.125);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (16.125,7.875) -- (12.25,7.875);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (10.125,8) -- (10.125,8.5);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (10.125,9.75) -- (10.125,11.25);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (11.125,9.25) -- (12.125,9.25);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (10.625,11.625) -- (11.125,11.625);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (12,11.625) -- (12.5,12.125);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (12.125,12.875) -- (12.125,13.75);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (10.875,13.75) -- (9,13.75);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (7.75,13.625) -- (7.75,12.25);
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, color={rgb,255:red,255; green,0; blue,0}, text opacity=1, , inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.000cm] at (8.125,10.125) {I};
+                \end{circuitikz}
+                }%
+                \caption{Toveis likeretter i negativ periode}
+                \label{fig:toveis_negativ}
+            \end{figure}
+
+            Strømmen vil altså i begge tilfeller gå samme vei i både positiv og negativ halvperiode. Resultatet av dette er en spenningskurve over lastmotstanden som skissert i figur \ref{fig:input_output}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.7\textwidth]{Media/input_output_rectifier.PNG}
+                \caption{Input og output signalet i en toveis likeretter}
+                \label{fig:input_output}
+            \end{figure}
+
+            I figur \ref{fig:toveis_likeretter} illustreres hvordan man kan koble likeretteren slik at man får negativ spenning over $R4$ i både positiv og negativ halvperiode.
+
+            \begin{figure}[H]
+                \centering
+                \resizebox{0.7\textwidth}{!}{%
+                \begin{circuitikz}
+                \tikzstyle{every node}=[font=\fontsize{10.8pt}{14.1pt}\selectfont]
+                \draw (12.5,12.75) to[D] (11.25,11.5);
+                \draw (13.75,11.5) to[D] (12.5,10.25);
+                \draw (13.75,11.5) to[D] (12.5,12.75);
+                \draw (12.5,10.25) to[D] (11.25,11.5);
+                \draw (13.75,11.5) to[short] (17.5,11.5);
+                \draw (17.5,7.75) to[R,l={ \fontsize{10.8pt}{14.1pt}\selectfont R4}] (17.5,11.5);
+                \draw (12.5,10.25) to[short] (12.5,9);
+                \draw (12.5,9) to[short] (8.75,9);
+                \draw (11.25,11.5) to[short] (10,11.5);
+                \draw (10,11.5) to[short] (10,9.375);
+                \draw (10,9.375) to[short] (9.5,9.375);
+                \draw (9.5,9.375) to[short] (9.5,8.625);
+                \draw (9.5,8.625) to[short] (10,8.625);
+                \draw (10,8.625) to[short] (10,7.75);
+                \draw (10,7.75) to[short] (17.5,7.75);
+                \draw (8.75,9) to[short] (7.5,9);
+                \draw (12.5,12.75) to[short] (12.5,14);
+                \draw (12.5,14) to[short] (7.5,14);
+                \draw (7.5,9) to[sinusoidal voltage source, sources/symbol/rotate=auto,l={ \fontsize{10.8pt}{14.1pt}\selectfont V2}] (7.5,14);
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (6.75,11) {20Vpp};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (16.75,9.25) {1k$\Omega$};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (11.5,12.5) {D1};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (13.5,12.5) {D2};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (11.375,10.625) {D4};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (13.625,10.625) {D3};
+                \end{circuitikz}
+                }%
+                \caption{Toveis likeretter}
+                \label{fig:toveis_likeretter}
+            \end{figure}
+
+            Polariteten antas å være den samme som i kretsen i figur \ref{fig:brokobling}, fra oppe til nede. Figur \ref{fig:positiv_toveis_likeretter} og \ref{fig:negativ_toveis_likeretter} illustrerer hvordan strømmen går i begge halvperiodene. 
+            I positiv halvperiode går strømmen gjennom $D1$ også over $R4$ motsatt vei av fra hvordan potensialet over $R4$ måles. Så fortsetter den gjennom $D3$. $D2$ og $D4$ opererer i dette tilfellet i \textit{reverse bias} og sperrer strømmen.
+            I negativ halvperiode skifter retningen på strømmen og diodene $D2$ og $D4$ leder strømmen gjennom. I dette tilfellet vil også strømmen gå motsatt vei av hvordan potensialet måles. På denne måten vil kurven for spenningen over $R4$ være helt motsatt av utsignalet som illustrert i \ref{fig:input_output}. Man får da negativ spenning i forhold til polariteten.
+            \begin{figure}[H]
+                \centering
+                \resizebox{0.7\textwidth}{!}{%
+                \begin{circuitikz}
+                \tikzstyle{every node}=[font=\fontsize{10.8pt}{14.1pt}\selectfont]
+                \draw (13.75,11.5) to[short] (17.5,11.5);
+                \draw (17.5,7.75) to[R,l={ \fontsize{10.8pt}{14.1pt}\selectfont R4}] (17.5,11.5);
+                \draw (12.5,10.25) to[short] (12.5,9);
+                \draw (12.5,9) to[short] (8.75,9);
+                \draw (11.25,11.5) to[short] (10,11.5);
+                \draw (10,11.5) to[short] (10,9.375);
+                \draw (10,9.375) to[short] (9.5,9.375);
+                \draw (9.5,9.375) to[short] (9.5,8.625);
+                \draw (9.5,8.625) to[short] (10,8.625);
+                \draw (10,8.625) to[short] (10,7.75);
+                \draw (10,7.75) to[short] (17.5,7.75);
+                \draw (8.75,9) to[short] (7.5,9);
+                \draw (12.5,12.75) to[short] (12.5,14);
+                \draw (12.5,14) to[short] (7.5,14);
+                \draw (7.5,9) to[sinusoidal voltage source, sources/symbol/rotate=auto,l={ \fontsize{10.8pt}{14.1pt}\selectfont V2}] (7.5,14);
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (6.75,11) {20Vpp};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (16.75,9.25) {1k$\Omega$};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (11.5,12.5) {D1};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (13.5,12.5) {D2};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (11.375,10.625) {D4};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (13.625,10.625) {D3};
+                \draw (12.5,12.75) to[D] (11.25,11.5);
+                \draw (13.75,11.5) to[D] (12.5,10.25);
+                \draw (12.5,12.75) to[normal open switch] (13.75,11.5);
+                \draw (11.25,11.5) to[normal open switch] (12.5,10.25);
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.000cm] at (7.125,12.125) {+};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.000cm] at (7.125,10.5) {-};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.000cm] at (17.75,10.375) {+};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.000cm] at (17.75,8.875) {-};
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (7.875,12.25) -- (7.875,13.5);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (8.625,13.75) -- (11.25,13.75);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (12.25,13.75) -- (12.25,13);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (12.375,12.125) -- (11.75,11.5);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (11,11.25) -- (10.25,11.25);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (10.125,10.625) -- (10.125,9.875);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (10.25,8.375) -- (10.25,7.875);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (10.875,8) -- (15.75,8);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (17.125,8) -- (17.125,8.75);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (17.125,10.25) -- (17.125,11);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (16.375,11.25) -- (14.375,11.25);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (13.125,11.5) -- (12.625,11);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (12.125,10.125) -- (12.125,9.25);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (11.25,9.25) -- (10.5,9.25);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (8.75,9.25) -- (8,9.25);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (7.875,9.625) -- (7.875,11);
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, color={rgb,255:red,255; green,0; blue,0}, text opacity=1, , inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.000cm] at (8.25,12.875) {I};
+                \end{circuitikz}
+                }%
+                \caption{Toveis likeretter postitiv halvperiode}
+                \label{fig:positiv_toveis_likeretter}
+            \end{figure}
+
+            \begin{figure}[h]
+                \centering
+                \resizebox{0.7\textwidth}{!}{%
+                \begin{circuitikz}
+                \tikzstyle{every node}=[font=\fontsize{10.8pt}{14.1pt}\selectfont]
+                \draw (13.75,11.5) to[short] (17.5,11.5);
+                \draw (17.5,7.75) to[R,l={ \fontsize{10.8pt}{14.1pt}\selectfont R4}] (17.5,11.5);
+                \draw (12.5,10.25) to[short] (12.5,9);
+                \draw (12.5,9) to[short] (8.75,9);
+                \draw (11.25,11.5) to[short] (10,11.5);
+                \draw (10,11.5) to[short] (10,9.375);
+                \draw (10,9.375) to[short] (9.5,9.375);
+                \draw (9.5,9.375) to[short] (9.5,8.625);
+                \draw (9.5,8.625) to[short] (10,8.625);
+                \draw (10,8.625) to[short] (10,7.75);
+                \draw (10,7.75) to[short] (17.5,7.75);
+                \draw (8.75,9) to[short] (7.5,9);
+                \draw (12.5,12.75) to[short] (12.5,14);
+                \draw (12.5,14) to[short] (7.5,14);
+                \draw (7.5,9) to[sinusoidal voltage source, sources/symbol/rotate=auto,l={ \fontsize{10.8pt}{14.1pt}\selectfont V2}] (7.5,14);
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (6.75,11) {20Vpp};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (16.75,9.25) {1k$\Omega$};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (11.5,12.5) {D1};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (13.5,12.5) {D2};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (11.375,10.625) {D4};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (13.625,10.625) {D3};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.000cm] at (17.75,10.375) {+};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.000cm] at (17.75,8.875) {-};
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (7.75,10.875) -- (7.75,9.375);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (10.5,9.25) -- (12.125,9.25);
+                \draw (12.5,10.25) to[D] (11.25,11.5);
+                \draw (13.75,11.5) to[D] (12.5,12.75);
+                \draw (11.25,11.5) to[normal open switch] (12.5,12.75);
+                \draw (12.5,10.25) to[normal open switch] (13.75,11.5);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (12.5,10.75) -- (11.75,11.5);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (11,11.25) -- (10.25,11.25);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (10.25,8.5) -- (10.25,8);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (11.25,8) -- (16.625,8);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (17.125,8.25) -- (17.125,8.875);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (17.125,10.375) -- (17.125,11.125);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (16.125,11.125) -- (14.25,11.125);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (13.125,11.625) -- (12.5,12.25);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (12.25,13) -- (12.25,13.875);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (11.25,13.75) -- (8.5,13.75);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (7.75,13.25) -- (7.75,12.25);
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, color={rgb,255:red,255; green,0; blue,0}, text opacity=1, , inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.000cm] at (8.125,10.125) {I};
+                \end{circuitikz}
+                }%
+                \caption{Toveis likeretter negativ halvperiode}
+                \label{fig:negativ_toveis_likeretter}
+            \end{figure}
+
+            Siden det er spenningsfall over to dioder i hver halvperiode i kretsene fra både figur \ref{fig:brokobling} og \ref{fig:toveis_likeretter}, vil den teoretiske verdien for DC-spenningen enten være positiv eller negativ, avhengig av hvilken krets man ser på.
+            
+            Ser man på kretsen i figur \ref{fig:brokobling} vil det totale spenningsfallet fra diodene være lik
+            \begin{align*}
+                V_D = 2\times 0.7V = 1.4V.
+            \end{align*}
+            
+            Spenningsfallet over $R4$ kan da bestemmes, og den teoretiske DC-spenningen kan regnes ut med likning \eqref{eq:toveis_likeretter_DC}:
+            \begin{align*}
+                &V_{R4} = 10V - 1.4V = 8.6V \\
+                \implies &V_{DC} = \frac{2 V_{R4}}{\pi} = \frac{2\times 8.6V}{\pi} = 5.47V
+            \end{align*}
 
         \subsubsection{Toveis likeretter med RC-ledd}
+        
+        I figur \ref{fig:RC_ledd} utvides kretsen fra figur \ref{fig:brokobling} med en kondensator i parallell med $R4$. Når en kondensator $C2$ kobles parallelt med $R4$ i likeretterkretsen, dannes et RC-ledd som fungerer som en \textit{smoothing capacitor}. Kondensatoren lades opp til toppverdien av den likerettede spenningen når diodene leder, og når inngangsspenningen synker, vil kondensatoren avgi energi til lastmotstanden og dermed opprettholde spenningen over $R4$. 
+        Dette fører til at utgangsspenningen blir jevnere, med redusert ripple, og at gjennomsnittlig DC-spenning øker.
+        \begin{figure}[H]
+            \centering
+            \resizebox{0.7\textwidth}{!}{%
+            \begin{circuitikz}
+            \tikzstyle{every node}=[font=\fontsize{10.8pt}{14.1pt}\selectfont]
+            \draw (13.75,11.5) to[short] (17.5,11.5);
+            \draw (17.5,7.75) to[R,l={ \fontsize{10.8pt}{14.1pt}\selectfont R4}] (17.5,11.5);
+            \draw (12.5,10.25) to[short] (12.5,9);
+            \draw (12.5,9) to[short] (8.75,9);
+            \draw (11.25,11.5) to[short] (10,11.5);
+            \draw (10,11.5) to[short] (10,9.375);
+            \draw (10,9.375) to[short] (9.5,9.375);
+            \draw (9.5,9.375) to[short] (9.5,8.625);
+            \draw (9.5,8.625) to[short] (10,8.625);
+            \draw (10,8.625) to[short] (10,7.75);
+            \draw (10,7.75) to[short] (17.5,7.75);
+            \draw (8.75,9) to[short] (7.5,9);
+            \draw (12.5,12.75) to[short] (12.5,14);
+            \draw (12.5,14) to[short] (7.5,14);
+            \draw (7.5,9) to[sinusoidal voltage source, sources/symbol/rotate=auto,l={ \fontsize{10.8pt}{14.1pt}\selectfont V2}] (7.5,14);
+            \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (6.75,11) {20Vpp};
+            \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (16.75,9.25) {1k$\Omega$};
+            \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (11.5,12.5) {D1};
+            \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (13.5,12.5) {D2};
+            \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (11.375,10.625) {D4};
+            \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (13.625,10.625) {D3};
+            \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.000cm] at (17.75,10.375) {+};
+            \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.000cm] at (17.75,8.875) {-};
+            \draw [ text opacity=1](11.25,11.5) to[D] (12.5,12.75);
+            \draw [ text opacity=1](12.5,10.25) to[D] (13.75,11.5);
+            \draw (20,7.75) to[C,l={ \fontsize{10.8pt}{14.1pt}\selectfont C2}] (20,11.5);
+            \draw [ text opacity=1](17.5,11.5) to[short] (20,11.5);
+            \draw [ text opacity=1](17.5,7.75) to[short] (20,7.75);
+            \draw (12.5,12.75) to[D] (13.75,11.5);
+            \draw (11.25,11.5) to[D] (12.5,10.25);
+            \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.000cm] at (19.75,10.125) {+};
+            \end{circuitikz}
+            }%
+            \caption{Toveis likeretter med RC-ledd}
+            \label{fig:RC_ledd}
+        \end{figure}
+
+        Verdien av kondensatoren har stor betydning for hvor effektiv glattingen er. En større kapasitans gjør at kondensatoren kan lagre mer ladning og lades ut langsommere mellom toppene i signalet. Dette gir mindre rippel og en høyere og mer stabil DC-spenning. 
+        En mindre kapasitans vil derimot føre til at kondensatoren lades ut raskere, noe som gir større spenningsvariasjoner (økt ripple) og lavere gjennomsnittlig likespenning over $R4$.
 
 
             
