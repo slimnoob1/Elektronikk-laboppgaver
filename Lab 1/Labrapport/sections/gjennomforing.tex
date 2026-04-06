@@ -1,12 +1,17 @@
 \section{Gjennomføring med måleresultater}
     I dette kapittelet presenteres resultatene fra de forskjellige kretsene det er gjort målinger på. Resultatene presenteres i form av bilder tatt direkte av oscilloskopet og signalene som vises der. Hensikten er å vise hvordan oppgaven utføres i praksis og hvordan de resultatene man får oppstår. 
     \subsection{Måling på enkel klippekrets}
+        Den første kretsen som skal gjennomføres måling på er en enkel klippekrets illustrert i figur \ref{fig:enkel_klippekrets1}.
+        Kretsen ble koblet eksakt som det er illustrert i figuren, og oscilloskopet brukes deretter til å sammenligne den teoretiske kurven for spenningen over dioden med de målte spenningskurvene på oscilloskopet.
         \begin{figure}[H]
             \centering
             \includegraphics[width=0.7\textwidth]{Media/klippekrets.png}
             \caption{Enkel klippekrets}
             \label{fig:enkel_klippekrets1}
         \end{figure}
+
+        Fra figur \ref{fig:enkel_klippekrets2} ser man en blå og en gul kurve i oscilloskopet. Disse representerer spenningen fra henholdsvis $V1$ og over dioden $D3$. 
+        Figuren bekrefter den teoretiske kurven illustrert i figur \ref{fig:python_enkel_klippekrets}. Spenningen over $D3$ klippes på omtrent $0.7V$ i positiv halvperiode, og i negativ halvperiode er spenningen over $D3$ omtrent lik inngangsspenningen.
 
         \begin{figure}[H]
             \centering
@@ -16,12 +21,18 @@
         \end{figure}
 
     \subsection{Måling på utvidet klippekrets}
+        Videre kobles en diode $D5$ til i parallell med $D3$. Kretsen er koblet eksakt som illustrert i figur \ref{fig:utvidet_klippekrets1}. 
+        Igjen så er hensikten å sammenligne den teoretiske kurven med de faktiske faktiske spenningskurvene.
         \begin{figure}[H]
             \centering
             \includegraphics[width=0.7\textwidth]{Media/utvidet_klippekrets.png}
             \caption{Utvidet klippekrets}
             \label{fig:utvidet_klippekrets1}
         \end{figure}
+
+        I figur \ref{fig:utvidet_klippekrets2} ser man resultatene fra målingene gjort på kretsen. Man ser at spenningen over parallellen veksler og klippes på omtrent $\pm 0.7V$ når spenningen fra spenningskilden veksler.
+        Dette stemmer overens med den teoretiske kurven illustrert i figur \ref{fig:python_utvidet_klippekrets}.
+
 
         \begin{figure}[H]
             \centering
@@ -31,33 +42,29 @@
         \end{figure}
         
     \subsection{Måling på klippekrets med zenerdioder}
+        I figur \ref{fig:klippekrets_zenerdioder1} skal spenningen $V_{ut}$ over de to zenerdiodene i serie måles. Kretsen divergerer fra kretsen i figur \ref{fig:klippekrets_zenerdioder} ved at $V_{ut}$ faktisk ble målt fra opp til ned som pilen viser i figur \ref{fig:klippekrets_zenerdioder1}, istedenfor ned til opp som det opprinnelig var tenkt. Forventet resultat vil da forventes å være motsatt av den teoretiske kurven fra figur \ref{fig:python_klippekrets_zenerdioder}.
         \begin{figure}[H]
-            \centering
-            \resizebox{0.7\textwidth}{!}{%
-            \begin{circuitikz}
-            \tikzstyle{every node}=[font=\fontsize{8.0pt}{10.4pt}\selectfont]
-            \draw (5,8.625) to[sinusoidal voltage source, sources/symbol/rotate=auto,l={ \fontsize{8.0pt}{10.4pt}\selectfont $V1~20V_{pp}$}] (5,7.375);
-            \draw (7.5,10.5) to[R,l={ \fontsize{8.0pt}{10.4pt}\selectfont $R_1~180\Omega$}] (8.75,10.5);
-            \draw (11.25,8.5) to[empty Zener diode,l={ \fontsize{8.0pt}{10.4pt}\selectfont $D_4~C4V7$}] (11.25,10);
-            \draw (11.25,7.5) to[empty Zener diode] (11.25,6);
-            \draw (5,5.5) to[short] (11.25,5.5);
-            \draw (5,9.25) to[short] (5,10.5);
-            \draw (5,10.5) to[short] (7.5,10.5);
-            \draw (8.75,10.5) to[short] (11.25,10.5);
-            \draw (11.25,10.5) to[short] (11.25,10);
-            \draw (11.25,8.5) to[short] (11.25,7.5);
-            \draw (11.25,6) to[short] (11.25,5.5);
-            \draw (5,5.5) to[short] (5,7.5);
-            \draw (5,8.625) to[short] (5,9.375);
-            \draw [-{Stealth[scale=1.5]}, ] (12.5,5.5) -- (12.5,10.375);
-            \node [font=\fontsize{8.0pt}{10.4pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (10.25,6.75) {$D_5~C6V8$};
-            \node [font=\fontsize{8.0pt}{10.4pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (13,7.75) {$V_{ut}$};
-            \end{circuitikz}
-            }%
-            \caption{Klippekrets med zenerdioder}
-            \label{fig:klippekrets_zenerdioder1}
+        \centering
+        \resizebox{0.7\textwidth}{!}{%
+        \begin{circuitikz}
+        \tikzstyle{every node}=[font=\fontsize{10.8pt}{14.1pt}\selectfont]
+        \draw (6.25,6.75) to[sinusoidal voltage source, sources/symbol/rotate=auto,l={ \fontsize{10.8pt}{14.1pt}\selectfont V1 20Vpp}] (6.25,11.75);
+        \draw (13.75,9.25) to[empty Zener diode] (13.75,6.75);
+        \draw (13.75,9.25) to[empty Zener diode,l={ \fontsize{10.8pt}{14.1pt}\selectfont D4 C4V7}] (13.75,11.75);
+        \draw (6.25,6.75) to[short] (13.75,6.75);
+        \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (12.625,8) {D5 C6V8};
+        \draw [-{Stealth[scale=1.5]}, ] (15,11.75) -- (15,7.25);
+        \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (15.5,9.5) {$V_{ut}$};
+        \draw (6.25,11.75) to[R,l={ \fontsize{10.8pt}{14.1pt}\selectfont R1 180$\Omega$}] (13.75,11.75);
+        \end{circuitikz}
+        }%
+        \caption{Klippekrets med zenerdioder}
+        \label{fig:klippekrets_zenerdioder1}
         \end{figure}
 
+        I figur \ref{fig:klippekrets_zenerdioder2} ser man spenningskurvene for inngangssignalet $V1$ og $V_{ut}$. Som forventet er den gule kurven, altså $V_{ut}$, motsatt fra kurven i figur \ref{fig:python_klippekrets_zenerdioder}.
+        I positiv halvperiode klippes spenningen til omtrent i underkant av $6V$ istedenfor $-5.4V$, mens i negativ halvperiode klippes spenningen til omtrent $-7.5V$ istedenfor $7.5V$.
+        Generelt sett så stemmer de teoretiske beregningene i henhold til de praktiske målingene, men på grunn av måten $V_{ut}$ måles på så fremstår målingene som motsatt.
         \begin{figure}[H]
             \centering
             \includegraphics[width=0.7\textwidth]{Media/IMG_0869.jpeg}
@@ -65,7 +72,6 @@
             \label{fig:klippekrets_zenerdioder2}
         \end{figure}
         
-        Målt motsatt vei enn fra figur~\ref{fig:klippekrets_zenerdioder1}
     \subsection{Målinger på kretser for enveis likeretting}
         \subsubsection{Enveis likeretting}
             \begin{figure}[H]
