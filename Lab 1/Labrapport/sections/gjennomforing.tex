@@ -74,6 +74,9 @@
         
     \subsection{Målinger på kretser for enveis likeretting}
         \subsubsection{Enveis likeretting}
+            I kretsen i figur \ref{fig:enveis_likeretter1} skal spenningen fra $V2$ og spenningen over motstanden $R2$ undersøkes. 
+            Dioden vil kun slippe strøm gjennom i den positive halvperioden, slik at det er kun i den positive halvperioden strømmen passerer gjennom $R2$.
+            Hensikten her vil være å sammenligne inngangssignalet med utgangssignalet og observere hvordan signalet blir likerettet til en pulserende likespenning.
             \begin{figure}[H]
                 \centering
                 \includegraphics[width=0.7\textwidth]{Media/enveis_likeretting.png}
@@ -81,6 +84,13 @@
                 \label{fig:enveis_likeretter1}
             \end{figure}
 
+            I figur \ref{fig:enveis_likeretter2} ser man kurvene for inngangssignalet $V2$ og utsignalet over $R2$. I positiv halvperiode ser man at spenningen over $R2$ er lik $0V$ i et lite øyeblikk, før den nesten følger den blå kurven til toppunktet.  
+            Dette fordi at det ikke går noen strøm igjennom $R2$ før diode $D15$ ser et spenningsfall på $0.7V$ over seg. Slik at det maksimale spenningsfallet over $R2$ er lik
+            \begin{align*}
+                V_{R2} = V2 - V_D = 10V - 0.7V = 9.3V. 
+            \end{align*} 
+
+            I negativ halvperide har utsignalet blitt enveis likerettet og er tilnærmet lik $0V$. Dette fordi dioden sperrer strømmen å gå den retningen. 
             \begin{figure}[H]
                 \centering
                 \includegraphics[width=0.7\textwidth]{Media/IMG_0870.jpeg}
@@ -88,7 +98,33 @@
                 \label{fig:enveis_likeretter2}
             \end{figure}
 
+            Videre i figur \ref{fig:enveis_likeretter2} ovenfor kan man observere at perioden $T$ for innsignalet, samt utsignalet, er lik $20ms$. Det ser man fordi signalet gjentar seg selv etter $20ms$. Dette tilsvarer en frekvens på:
+            \begin{align*}
+                f=\frac{1}{T}=\frac{1}{20ms} =50Hz.
+            \end{align*}
+
+            For å regne ut den påtrykte DC-spenningen over $R2$ behøver man først å vite spenningsfallet over dioden $D15$. Denne måles med multimeteret til å være lik:
+            \begin{align*}
+                V_D = 0.6084V 
+            \end{align*}
+
+            Med verdien for $V_D$ samt likning \eqref{eq:enveis_likeretter_DC} kan DC-spenningen over $R2$ regnes ut.
+            \begin{align*}
+                V_{DC1} = \frac{V_{R2}}{\pi} = \frac{10V-0.6084V}{\pi} = 2.989V.
+            \end{align*}
+
+            For å kontrollsjekke, måles DC-spenningen direkte over $R2$ med et multimeter. Dette gir verdien:
+            \begin{align*}
+                V_{DC2} = 2.35V.
+            \end{align*}
+
+            Dette gir et prosentvis avvik på:
+                \begin{align*}
+                    Avvik_{\%} = \frac{2.989V-2.35V}{2.35V}\times 100 = 27.19\%.
+                \end{align*}
+
             \subsubsection{Enveis likeretting: dioden snudd}
+                I figur \ref{fig:flip_diode_enkel_likeretter1} skal tilsvarende målinger gjøres som tidligere, men bare at dioden denne gangen er snudd. 
                 \begin{figure}[H]
                     \centering
                     \resizebox{0.7\textwidth}{!}{%
@@ -110,6 +146,11 @@
                     \label{fig:flip_diode_enkel_likeretter1}
                 \end{figure}
 
+                Resultatet ser man i figur \ref{fig:flip_diode_enkel_likeretter2}. Det er motsatt av det man så når dioden var andre veien. Spenningen over $R2$ er lik $0V$ i positiv halvperiode, da dioden opererer i \textit{reverse bias}. 
+                I negativ halvperiode er spenningen lik $0V$ i et kort øyeblikk før den følger kurven til $V2$ subtrahert med $0.7V$. Altså en toppspenning i negativ halvperiode på:
+                \begin{align*}
+                    V_R2 = V2 + V_D = -10V + 0.7V = -9.3V.
+                \end{align*}
                 \begin{figure}[H]
                     \centering
                     \includegraphics[width=0.7\textwidth]{Media/IMG_0871.jpeg}
@@ -117,7 +158,30 @@
                     \label{fig:flip_diode_enkel_likeretter2}
                 \end{figure}
     \subsection{Målinger på krets for toveis likeretting}
-        230V transformator brukt
+        For målingene på kretsen som vist i figur \ref{fig:transformer_rectifier}, ble det benyttet en 230V-transformator som transformerer 230V vekselspenning fra stikkontakten i veggen, til 40V-vekselspenning som inngangssignalet til kretsen. Altså $V2$ er $20Vpp$.
+        
+        Det skal måles og tegnes utgangsspenningen over lastmotstanden, som man i denne kretsen kaller $R4$ med en verdi på $1k\Omega$.
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.7\textwidth]{Media/transformer_rectifier.png}
+            \caption{Illustrasjon av oppkoblet krets}
+            \label{fig:transformer_rectifier}
+            \end{figure}
+
+        Kurven for spenningen over $R4$ kan sees i figur \ref{fig:toveis_likeretting_transformator}. Man ser at utgangssignalet likerettes i begge halvperioder. Den teoretiske DC-spenningen over $R4$ kan regnes ut. Siden det er et spenningsfall over to dioder må dette tas hensyn til. Likning \eqref{eq:toveis_likeretter_DC} gir:
+        \begin{align*}
+            V_{DC1} = \frac{2V_{peak}}{\pi} = \frac{2(20V - 2\times 0.7V)}{\pi} = 11.84V.
+        \end{align*}
+
+        For å kontrollsjekke så måles DC-spenningen over $R4$ til:
+        \begin{align*}
+            V_{DC2} = 10.88V. 
+        \end{align*}
+
+        Dette tilsvarer et prosentvis avvik på
+        \begin{align*}
+            Avvik_{\%} = \frac{11.84V-10.88V}{10.88V}\times 100 = 8.8\%.
+        \end{align*}
         \begin{figure}[H]
             \centering
             \includegraphics[width=0.7\textwidth]{Media/IMG_0873.jpeg}
@@ -126,6 +190,10 @@
         \end{figure}
         
     \subsection{Målinger på krets for toveis likeretter med RC-ledd}
+        Her utvides kretsen fra figur \ref{fig:transformer_rectifier} med en kondensator $C2$ i parallell med lastmotstanden. På oscilloskopet skal både DC-mode og AC-mode brukes for målingene. 
+        AC-mode fungerer slik at en kondensator blokkerer likestrømskomponenten (DC) i signalet. Dermed slipper kun vekselstrømsdelen (AC) gjennom til oscilloskopet. AC-mode fungerer som et høypassfilter. Dette er veldig nyttig når man ønsker å studerer små variasjoner eller ripple i et signal uten at DC-nivået forstyrrer målingen.
+
+        DC-mode lar hele signalet passere til oscilloskopet. Det inkluderer både DC-komponenten, AC-komponenten og eventuell støy. Denne modusen brukes når man ønsker å se hele signalet slik det faktisk er, inkludert gjennomsnittsnivået (offset). DC-kobling er derfor nyttig når man skal måle den totale spenningen eller finne DC-offset i et signal, selv om det også inneholder mye AC-støy \cite{acdc_mode}.
         \subsubsection{RC-ledd: $C2 = 100\mu F$}
             \begin{figure}[H]
                 \centering
@@ -133,7 +201,6 @@
                 \caption{DC-mode: måling på spenningen over RC-leddet med $100\mu F$}
                 \label{fig:toveis_likeretting_transformator_RC1}
             \end{figure}
-            Ser hele signalet med DC-mode
 
             \begin{figure}[H]
                 \centering
@@ -141,8 +208,8 @@
                 \caption{AC-mode: måling på spenningen over RC-leddet med $100\mu F$}
                 \label{fig:toveis_likeretting_transformator_RC2}
             \end{figure}
-
-            Studere ripple nærmere med AC-mode. Rippelens peak-peak-verdi kan leses av fra oscilloskopet, og er lik $Vpp=5.60V$.
+            
+            Rippelens peak-peak-verdi kan leses av fra oscilloskopet, og er lik $Vpp=5.60V$.
 
     \subsubsection{RC-ledd: $C2 = 10\mu F$}
         \begin{figure}[H]

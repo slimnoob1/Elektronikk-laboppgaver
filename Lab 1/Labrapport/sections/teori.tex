@@ -1,4 +1,4 @@
-\section{Teori}
+    \section{Teori}
     \subsection{Halvlederdiode}
         En halvlederdiode er en elektronisk komponent som tillater strøm å flyte i én retning, mens den blokkerer strøm i motsatt retning. Den er laget av halvledermaterialer som silisium (Si) eller germanium (Ge), og benyttes blant annet til å omforme vekselstrøm til likestrøm samt i behandling av elektriske signaler, som deteksjon og modulasjon \cite{snl_halvlederdiode}.
 
@@ -27,8 +27,18 @@
     \subsection{Zenerdiode}
         En zenerdiode er en type halvlederdiode som kan lede strøm både i lederetning og i sperreretning. Den er konstruert slik at den begynner å lede kraftig i sperreretningen når spenningen når en bestemt verdi, kalt zenerspenningen. Dette fenomenet kalles zenereffekten. I lederetning oppfører zenerdioden seg på samme måte som en vanlig diode \cite{snl_zenerdiode}.
         
-        \subsubsection{BZX55/C6V8}
-            BZX55/C6V8 er en zenerdiode som er designet for spenningsstabilisering i elektroniske kretser. Den tåler en effekt på maksimalt $500mW$. Zenerspenningen $V_z$ ligger i området $6.4<V_z<7.2V$ ved en målt med en strøm på $I_z = 5mA$. Maksimal spenning i lederetning er $V_F = 1.0V$, som gjelder ved en strøm på $I_F = 100mA$ \cite{bzx55}.
+        \subsubsection{Spesifikasjoner for BZX55/C6V8 zenerdiode}
+            \begin{table}[H]
+                \centering
+                \caption{Spesifikasjoner for BZX55/C6V8 zenerdiode}
+                \begin{tabular}{|l|c|l|}
+                \hline
+                \textbf{Parameter} & \textbf{Verdi} & \textbf{Betingelse} \\ \hline
+                Maks effekt $P_{\text{max}}$ & $500mW$ & -- \\ \hline
+                Zenerspenning $V_Z$ & $6.4 - 7.2V$ & $I_Z = 5mA$ \\ \hline
+                Fremoverspenning $V_F$ & $1.0V$ & $I_F = 100mA$ \\ \hline
+                \end{tabular}
+            \end{table}
 
     \subsection{Vekselstrøm}
         Vekselstrøm er elektrisk strøm som skifter retning periodisk, slik at det i gjennomsnitt går like mye strøm i begge retninger langs en leder \cite{vekselstrom}.
