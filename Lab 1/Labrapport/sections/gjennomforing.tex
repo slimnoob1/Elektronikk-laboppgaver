@@ -191,27 +191,41 @@
         
     \subsection{Målinger på krets for toveis likeretter med RC-ledd}
         Her utvides kretsen fra figur \ref{fig:transformer_rectifier} med en kondensator $C2$ i parallell med lastmotstanden. På oscilloskopet skal både DC-mode og AC-mode brukes for målingene. 
+
         AC-mode fungerer slik at en kondensator blokkerer likestrømskomponenten (DC) i signalet. Dermed slipper kun vekselstrømsdelen (AC) gjennom til oscilloskopet. AC-mode fungerer som et høypassfilter. Dette er veldig nyttig når man ønsker å studerer små variasjoner eller ripple i et signal uten at DC-nivået forstyrrer målingen.
 
         DC-mode lar hele signalet passere til oscilloskopet. Det inkluderer både DC-komponenten, AC-komponenten og eventuell støy. Denne modusen brukes når man ønsker å se hele signalet slik det faktisk er, inkludert gjennomsnittsnivået (offset). DC-kobling er derfor nyttig når man skal måle den totale spenningen eller finne DC-offset i et signal, selv om det også inneholder mye AC-støy \cite{acdc_mode}.
         \subsubsection{RC-ledd: $C2 = 100\mu F$}
+        I figur \ref{fig:toveis_likeretting_transformator_DC} ser man spenningen over RC-leddet med $C2 = 100\mu F$. Her er oscilloskopet satt til DC-mode, og man observerer at hele signalet har passert til oscilloskopet, slik det er beskrevet ovenfor. 
+        
+        Med et multimeter måles DC-spenningen over RC-leddet til å være lik $V_{DC} = 15.08V$. 
+            
             \begin{figure}[H]
-                \centering
-                \includegraphics[width=0.7\textwidth]{Media/IMG_0874.jpeg}
-                \caption{DC-mode: måling på spenningen over RC-leddet med $100\mu F$}
-                \label{fig:toveis_likeretting_transformator_RC1}
-            \end{figure}
+                    \centering
+                    \includegraphics[width=0.7\textwidth]{Media/IMG_0874.jpeg}
+                    \caption{DC-mode: måling på spenningen over RC-leddet med $100\mu F$}
+                    \label{fig:toveis_likeretting_transformator_DC}
+                \end{figure}
+
+            Videre i figur \ref{fig:toveis_likeretting_transformator_AC} ser man det samme signalet i oscilloskopet, men nå i AC-mode. 
+            Her så er likestrømskomponenten blokkert, slik at man kun ser vekselstrømsdelen og kan undersøke ripple nærmere. Fra oscilloskopet måles signalets ripple til $V_{r}= 5.60V$. 
+            Dette tilsvarer en ripple-faktor på
+            \begin{align*}
+                \%_r = \frac{V_R}{V_{DC}}\times 100 = \frac{5.60V}{15.08V}\times 100 = 37.13\%.
+            \end{align*}
 
             \begin{figure}[H]
                 \centering
                 \includegraphics[width=0.7\textwidth]{Media/IMG_0875.jpeg}
                 \caption{AC-mode: måling på spenningen over RC-leddet med $100\mu F$}
-                \label{fig:toveis_likeretting_transformator_RC2}
+                \label{fig:toveis_likeretting_transformator_AC}
             \end{figure}
-            
-            Rippelens peak-peak-verdi kan leses av fra oscilloskopet, og er lik $Vpp=5.60V$.
 
     \subsubsection{RC-ledd: $C2 = 10\mu F$}
+        I figur \ref{fig:toveis_likeretting_transformator_RC3} er kondensatoren i RC-leddet byttet ut med en $10\mu F$ kondensator istedet. 
+        Man ser på kurven at spenningen over RC-leddet øker og synker raskere. Dette er på grunn av lavere kapasitans, slik at kondensatoren lades raskere opp, og raskere ut. Konsekvensen er at det blir høyere ripple og dermed lavere DC-spenning. 
+        DC-spenningen i signalet måles til å være lik $V_{DC} = 11.44V$ med multimeteret. 
+        %$V_{pp} = 15.20V$ (variasjon). 
         \begin{figure}[H]
             \centering
             \includegraphics[width=0.7\textwidth]{Media/IMG_0876.jpeg}
