@@ -28,9 +28,11 @@
         En zenerdiode er en type halvlederdiode som kan lede strøm både i lederetning og i sperreretning. Den er konstruert slik at den begynner å lede kraftig i sperreretningen når spenningen når en bestemt verdi, kalt zenerspenningen. Dette fenomenet kalles zenereffekten. I lederetning oppfører zenerdioden seg på samme måte som en vanlig diode \cite{snl_zenerdiode}.
         
         \subsubsection{Spesifikasjoner for BZX55/C6V8 zenerdiode}
+            BZX55/C6V8 er en zenerdiode med zenerspenning $V_z = 6.8V$ som skal brukes i den praktiske delen av denne oppgaven. I tabell \ref{tab:zenerdiode_data} er zenerdiodens tekniske data og spesfikasjoner fra tilhørende datablad \cite{bzx55}. 
             \begin{table}[H]
                 \centering
                 \caption{Spesifikasjoner for BZX55/C6V8 zenerdiode}
+                \label{tab:zenerdiode_data}
                 \begin{tabular}{|l|c|l|}
                 \hline
                 \textbf{Parameter} & \textbf{Verdi} & \textbf{Betingelse} \\ \hline
@@ -60,12 +62,28 @@
         
     \subsection{Likeretting}
         \subsubsection{Enveis likeretter}
-            Funksjon, utgangssignal
+            Enveis likeretter er den enkleste formen for likeretting og benytter en diode til å omforme vekselspenning til en pulserende likespenning. Når inngangssignalet er en sinusformet vekselspenning, vil den ideelle dioden kun lede strøm i den positive halvperioden og sperre i den negative halvperioden. I lederetning kan dioden tilnærmes som en kortslutning, slik at utgangsspenningen følger inngangsspenningen. I sperreretning oppfører dioden seg som en åpen krets, og det går ingen strøm i kretsen, noe som gir null spenning over lasten.
+
+            Resultatet er at kun den positive delen av signalet slipper gjennom, mens den negative halvperioden fjernes. Utgangssignalet blir dermed en pulserende likespenning med en positiv middelverdi. Denne middelverdien kan beregnes teoretisk og brukes som et mål på hvor effektivt vekselspenningen er omformet til likespenning \cite{electronic_devices_and_circuit_theory}.
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.6\textwidth]{Media/half_wave_rect.png}
+                \caption{Inn- og utgangssignal i en enveis likeretter}
+                \label{fig:halfwave_rect}
+            \end{figure}
+
+            Den gjennomsnittlige likespenningen i et enveis likerettet utsignal i løpet av en hel periode $T$ er gitt ved: 
             \begin{align}
-                V_{DC} = \frac{V_{peak}}{\pi} \label{eq:enveis_likeretter_DC}
+                V_{DC} = \frac{V_{peak}}{\pi} = 0.318V_{peak} \label{eq:enveis_likeretter_DC}
             \end{align}
-        \subsubsection{Toveis likeretter}
-            Funksjon, begge halvperioder utnyttes
+        \subsubsection{Toveis likeretter: brokobling}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.7\textwidth]{Media/fullwave_recet.png}
+                \caption{Inn- og utgangssignal i en toveis-likeretter}
+                \label{fig:fullwave_rect}
+            \end{figure}
             \begin{align}
                 V_{DC} = \frac{2V_{peak}}{\pi} \label{eq:toveis_likeretter_DC}
             \end{align}

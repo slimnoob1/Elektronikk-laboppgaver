@@ -1,4 +1,30 @@
 \section{Diskusjon}
+    \subsection{Klippekrets med zenerdioder}
+        Det marginale avviket mellom teoretiske og målte verdier skyldes at zenerdiodene ikke har helt eksakte brytespenninger. I praksis varierer disse noe med strøm og temperatur, i tillegg til små måleusikkerheter. Dette fører til at klippingen skjer ved litt andre spenningsnivåer enn de ideelle beregningene tilsier. 
     \subsection{Enveis likeretting}
+        Avviket på $27.19\%$ mellom teoretisk og målt DC-spenning er relativt stort, og skyldes flere praktiske forhold som ikke tas hensyn til i den ideelle beregningen.
 
-    \subsection{Toveis likeretting}
+        En viktig årsak er at dioden ikke oppfører seg ideelt. Selv om spenningsfallet ble målt til $0.608V$, vil dette variere gjennom perioden fordi strømmen i kretsen endrer seg kontinuerlig.
+        Dette fører til at den faktiske spenningen over motstanden i gjennomsnitt blir lavere enn det den enkle modellen tilsier.
+
+        Målemetoden kan også påvirke resultatet. Multimeteret måles gjennomsnittsverdien av et pulserende signal, og  små variasjoner, støy eller unøyaktigheter i instrumentet kan føre til lavere målt verdi.
+
+        Det er også veldig sannsynlig at inngangsspenningen i praksis er noe lavere enn den antatte toppverdien på $10V$. Små spenningsfall internt i kretsen og på instrumentene gir små avvik, som igjen vil ha direkte innvirkning på beregnet DC-spenning. 
+
+        Til sammen forklarer disse faktorene hvorfor den målte verdien avviker såpass mye fra den teoretiske beregningen. 
+    \subsection{Avvik i målinger på toveis likeretter}
+        Det observeres et avvik på $8.8\%$ mellom den teoretiske og målte DC-spenningen- Dette avvikket kan forklares av ikke-ideelle forhold i kretsen. 
+
+        For det første er spenningsfallet over diodene ikke nødvendigvis nøyaktig $0.7V$. Denne verdien er kun en tilnærming for å gjøre beregninger enklere. I praksis varierer spenningsfallet med strøm og temperatur. Dersom strømmen i kretsen er lavere enn antatt, kan spenningsfallet være mindre, og motsatt.
+
+        Videre så er det ikke nødvendigvis nøyaktig $\pm 20V$ transformatoren gir ut, den er sannsynligvis lavere på grunn av spenningsfall internt i transformatoren eksempelvis, noe som reduserer toppverdien på signalet.
+
+        Måleusikkerhet fra multimeteret og oscilloskopet kan også bidra til avviket. Små feil i avlesning eller instrumentnøyaktighet vil påvirke resultatet.
+
+        Den teoretiske formelen for DC-spenningen i en toveis likeretter antar en ideell sinusformet spenning uten støy eller variasjoner. I praksis vil signalet ha små avvik fra en perfekt sinusbølge, noe som igjen har en påvirkning på resultatet.
+
+    \subsection{Toveis likeretting med RC-ledd}
+        \subsubsection{$10\mu F$ kondensator i RC-leddet}
+            Den reduserte kapasitansen fører til at kondensatoren lagrer mindre ladning. Dette gjør at den lades opp og utlades raskere mellom toppene i den likerettede spenningen.
+
+            Som følge av dette faller spenningen mer mellom hver toppverdi, noe som gir større ripple i signalet. Den økte ripple-spenningen fører til at DC-spenningen over RC-leddet blir lavere.

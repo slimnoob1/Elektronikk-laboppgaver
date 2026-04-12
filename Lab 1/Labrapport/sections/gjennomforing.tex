@@ -63,7 +63,7 @@
         \end{figure}
 
         I figur \ref{fig:klippekrets_zenerdioder2} ser man spenningskurvene for inngangssignalet $V1$ og $V_{ut}$. Som forventet er den gule kurven, altså $V_{ut}$, motsatt fra kurven i figur \ref{fig:python_klippekrets_zenerdioder}.
-        I positiv halvperiode klippes spenningen til omtrent i underkant av $6V$ istedenfor $-5.4V$, mens i negativ halvperiode klippes spenningen til omtrent $-7.5V$ istedenfor $7.5V$.
+        I positiv halvperiode klippes spenningen til omtrent $5.8V$ istedenfor $-5.4V$, mens i negativ halvperiode klippes spenningen til omtrent $-7.5V$ istedenfor $7.5V$.
         Generelt sett så stemmer de teoretiske beregningene i henhold til de praktiske målingene, men på grunn av måten $V_{ut}$ måles på så fremstår målingene som motsatt.
         \begin{figure}[H]
             \centering
@@ -222,9 +222,13 @@
             \end{figure}
 
     \subsubsection{RC-ledd: $C2 = 10\mu F$}
-        I figur \ref{fig:toveis_likeretting_transformator_RC3} er kondensatoren i RC-leddet byttet ut med en $10\mu F$ kondensator istedet. 
-        Man ser på kurven at spenningen over RC-leddet øker og synker raskere. Dette er på grunn av lavere kapasitans, slik at kondensatoren lades raskere opp, og raskere ut. Konsekvensen er at det blir høyere ripple og dermed lavere DC-spenning. 
-        DC-spenningen i signalet måles til å være lik $V_{DC} = 11.44V$ med multimeteret. 
+        I figur \ref{fig:toveis_likeretting_transformator_RC3} er kondensatoren i RC-leddet byttet ut med en $10\mu F$ kondensator. 
+        Kurven på oscilloskopet viser at spenningen over RC-leddet øker og synker raskere, og signalet får større variasjon, altså økt ripple.
+        DC-spenningen i signalet måles til å være lik
+        \begin{align*}
+            V_{DC} = 11.44V
+        \end{align*}
+        med multimeteret.
         %$V_{pp} = 15.20V$ (variasjon). 
         \begin{figure}[H]
             \centering
