@@ -49,8 +49,11 @@
         Vekselspenning er en elektrisk spenning som varierer periodisk med tiden, slik at polariteten er avvekslende positiv og negativ \cite{vekselsspenning}.
 
     \subsection{Klippekretser}
-    Klippekretser er kretser som benytter dioder til å fjerne deler av et inngangssignal uten å forvrenge den gjenværende delen av bølgeformen \cite{electronic_devices_and_circuit_theory}.
+        Klippekretser er elektriske kretser som benytter dioder til å fjerne deler av et inngangssignal uten å påvirke resten av bølgeformen. Ved å utnytte diodens evne til å lede strøm i én retning og sperre i den andre, kan enten den positive eller den negative delen av et signal bli «klippet» bort.
 
+        Den enkleste formen for klippekrets består av en diode og en motstand, og fungerer på tilsvarende måte som en enveis likeretter. Avhengig av hvordan dioden er orientert i kretsen, vil enten den positive eller negative halvperioden av signalet fjernes.
+
+        Klippekretser deles vanligvis inn i to hovedtyper: seriekoblet og parallellkoblet. I en seriekoblet klippekrets er dioden koblet i serie med lasten, mens i en parallellkoblet klippekrets er dioden koblet parallelt med lasten \cite{electronic_devices_and_circuit_theory}.
         \begin{figure}[H]
             \centering
             \includegraphics[width=0.7\textwidth]{Media/clipper2.PNG}
@@ -66,16 +69,31 @@
 
             Resultatet er at kun den positive delen av signalet slipper gjennom, mens den negative halvperioden fjernes. Utgangssignalet blir dermed en pulserende likespenning med en positiv middelverdi. Denne middelverdien kan beregnes teoretisk og brukes som et mål på hvor effektivt vekselspenningen er omformet til likespenning \cite{electronic_devices_and_circuit_theory}.
 
+            Dette illustreres i figur \ref{fig:halfwave_combined} nedenfor.
             \begin{figure}[H]
                 \centering
-                \includegraphics[width=0.6\textwidth]{Media/half_wave_rect.png}
-                \caption{Inn- og utgangssignal i en enveis likeretter}
-                \label{fig:halfwave_rect}
+                
+                \begin{subfigure}[b]{0.8\textwidth}
+                    \centering
+                    \includegraphics[width=\textwidth]{Media/half_wave_rect_circuit.png}
+                    \caption{Eksempel på en enveis likeretter}
+                    \label{fig:halfwave_rect_circuit}
+                \end{subfigure}
+                \hfill
+                \begin{subfigure}[b]{0.6\textwidth}
+                    \centering
+                    \includegraphics[width=\textwidth]{Media/half_wave_rect.png}
+                    \caption{Inn- og utgangssignal i en enveis likeretter}
+                    \label{fig:halfwave_rect}
+                \end{subfigure}
+                
+                \caption{Enveis likeretter og tilhørende signaler}
+                \label{fig:halfwave_combined}
             \end{figure}
 
             Den gjennomsnittlige likespenningen (DC-komponenten) for en ideell enveis likeretter med sinusformet inngangssignal kan uttrykkes som:
             \begin{align}
-                V_{DC} = \frac{V_{m}}{\pi} \approx 0.318V_{peak}
+                V_{DC} = \frac{V_{m}}{\pi} \approx 0.318V_{m}
                 \label{eq:enveis_likeretter_DC}
             \end{align}
             Her er $V_{m}$ toppverdien til inngangsspenningen. Uttrykket gjelder under forutsetning av en ideell diode uten spenningsfall.
@@ -84,6 +102,7 @@
 
             Resultatet er at både positive og negative deler av inngangssignalet bidrar til utgangsspenningen, som dermed blir en pulserende likespenning med høyere middelverdi enn ved enveis likeretting. Utgangssignalet får også dobbelt så høy frekvens som inngangssignalet, siden begge halvperioder utnyttes \cite{electronic_devices_and_circuit_theory}.
 
+            Dette illustreres i figur \ref{fig:toveis_likeretter2} nedenfor.
             \begin{figure}[H]
                 \centering
                 \begin{subfigure}[b]{0.4\textwidth}
@@ -110,9 +129,18 @@
                 \label{eq:toveis_likeretter_DC}
             \end{align}
             Her er $V_{m}$ toppverdien til inngangsspenningen. Uttrykket gjelder under forutsetning av en ideell diode uten spenningsfall.
-    \subsection{Ripple}
-        \subsubsection{Ripple-faktor}
-        
+    \subsection{Ripple og ripple-faktor}
+        Når en vekselspenning likerettes og filtreres, vil utgangsspenningen ikke bli helt konstant likespenning, men inneholde små variasjoner rundt et gjennomsnittsnivå. Disse variasjonene kalles ripple og representerer den gjenværende vekselstrømskomponenten i signalet.
+
+        Et ideelt filter ville gitt en helt konstant DC-spenning, slik som fra et batteri. I praksis vil det imidlertid alltid være noe ripple til stede. Jo mindre denne variasjonen er i forhold til DC-nivået, desto bedre fungerer filterkretsen.
+
+        Ripple kan måles som effektivverdien ($V_{r(rms)}$) av AC-komponenten i signalet, mens DC-spenningen tilsvarer middelverdien av signalet. For å kvantifisere hvor stor ripple som er til stede, benyttes ripple-faktoren, som er definert som forholdet mellom ripple-spenningen og DC-spenningen:
+        \begin{align}
+            r = \frac{V_{r(rms)}}{V_{DC}} \times 100\%
+        \end{align}
+
+        En lav ripple-faktor indikerer en jevn og stabil utgangsspenning, mens en høy ripple-faktor betyr større variasjoner i signalet \cite{electronic_devices_and_circuit_theory}.
+
     \subsection{Forhåndsberegninger}
         \subsubsection{Enkel klippekrets}
             I figur~\ref{fig:enkel_klippekrets} er det illustrert en enkel klippekrets som brukes til å undersøke hvordan spenningen over en diode varierer i en AC-krets. Kretsen består av en sinusformet spenningskilde $V1$ på $20V$ \textit{peak-to-peak}, altså med en amplitude på $10V$ varierende fra $\pm10V$,
@@ -163,7 +191,7 @@
                 \label{fig:python_enkel_klippekrets}
             \end{figure}
         \subsubsection{Utvidet klippekrets}
-            I figur~\ref{fig:utvidet_klippekrets} er det illustrert en utvidet klippekrets som brukes til å undersøke hvordan spenningen over en to dioder i parallell varierer i en AC-krets. Kretsen består av en sinusformet spenningskilde $V1$ på $20V$ \textit{peak-to-peak},
+            I figur~\ref{fig:utvidet_klippekrets} er det illustrert en utvidet klippekrets som brukes til å undersøke hvordan spenningen over en to dioder i parallell varierer i en AC-krets. Kretsen består av en sinusformet spenningskilde $V1$ på $20Vpp$,
             en motstand $R1$ på $180\Omega$ og to silisiumdioder $D3$ og $D5$ koblet i parallell, men med motstatt polaritet. 
 
             De to diodene fungerer som en klippekrets. Siden diodene er koblet i motsatt retning, vil kun en diode lede under positiv halvperiode og den andre lede under negativ halvperiode.

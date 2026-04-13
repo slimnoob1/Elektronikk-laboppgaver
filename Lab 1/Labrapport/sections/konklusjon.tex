@@ -1,2 +1,10 @@
 \section{Konklusjon}
-\dots
+    I denne oppgaven har virkemåten til halvlederdioder blitt undersøkt gjennom både klippekretser og likeretterkretser. Resultatene viser at dioden effektivt kan brukes til å forme signaler og til å omforme vekselspenning til likespenning.
+
+    For klippekretser ble det observert at dioden klipper signalet ved omtrent $0.7V$, i henhold til teorien for silisiumdioder. Ved bruk av to dioder i parallell ble signalet klippet symmetrisk i både positiv og negativ retning. For zenerdioder ble det vist at klippingen skjer ved bestemte spenningsnivåer definert av zenerspenningene. Dette viser at vanlige dioder brukes til enkel signalbegrensning, mens zenerdioder benyttes når man ønsker å kontrollere spenningsnivåer mer presist.
+
+    Ved enveis likeretting ble det observert at kun én halvperiode av signalet slipper gjennom, noe som gir en pulserende likespenning med relativt lav middelverdi. Toveis likeretting viste seg å være mer effektiv, siden begge halvperioder utnyttes. Dette gir høyere DC-spenning og et jevnere signal, men krever flere komponenter og gir spenningsfall over flere dioder.
+
+    Videre viste målingene på toveis likeretter med RC-ledd at kondensatoren bidrar til å glatte ut signalet. En større kondensator ga høyere DC-spenning og mindre ripple, mens en mindre kondensator førte til større variasjoner i signalet og lavere DC-nivå. Dette bekrefter at kondensatorer brukes for å redusere ripple og stabilisere utgangsspenningen i likeretterkretser.
+
+    Sammenligningen mellom teori og målinger viser seg å stemme veldig godt, spesielt når man tar hensyn til ikke-ideelle forhold. Avvikene som ble observert skyldes deriblant spenningsfall over dioder, variasjoner i komponentverdier og måleusikkerhet. Den ideelle diodemodellen gir gode nok tilnærminger i teorien, men må justeres og tas hensyn til i praktiske beregninger for å gi mer nøyaktige resultater.
