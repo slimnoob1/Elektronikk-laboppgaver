@@ -73,21 +73,43 @@
                 \label{fig:halfwave_rect}
             \end{figure}
 
-            Den gjennomsnittlige likespenningen i et enveis likerettet utsignal i løpet av en hel periode $T$ er gitt ved: 
+            Den gjennomsnittlige likespenningen (DC-komponenten) for en ideell enveis likeretter med sinusformet inngangssignal kan uttrykkes som:
             \begin{align}
-                V_{DC} = \frac{V_{peak}}{\pi} = 0.318V_{peak} \label{eq:enveis_likeretter_DC}
+                V_{DC} = \frac{V_{m}}{\pi} \approx 0.318V_{peak}
+                \label{eq:enveis_likeretter_DC}
             \end{align}
+            Her er $V_{m}$ toppverdien til inngangsspenningen. Uttrykket gjelder under forutsetning av en ideell diode uten spenningsfall.
         \subsubsection{Toveis likeretter: brokobling}
+            En toveis likeretter benytter fire dioder koblet i en brokobling for å utnytte både den positive og negative halvperioden av et vekselspenningssignal. I den positive halvperioden leder to av diodene, mens de to andre sperrer, slik at strømmen går gjennom lastmotstanden i én bestemt retning. I den negative halvperioden vil de motsatte diodene lede, men strømmen gjennom lasten vil fortsatt ha samme retning som i den positive halvperioden.
+
+            Resultatet er at både positive og negative deler av inngangssignalet bidrar til utgangsspenningen, som dermed blir en pulserende likespenning med høyere middelverdi enn ved enveis likeretting. Utgangssignalet får også dobbelt så høy frekvens som inngangssignalet, siden begge halvperioder utnyttes \cite{electronic_devices_and_circuit_theory}.
+
             \begin{figure}[H]
                 \centering
-                \includegraphics[width=0.7\textwidth]{Media/fullwave_recet.png}
-                \caption{Inn- og utgangssignal i en toveis-likeretter}
-                \label{fig:fullwave_rect}
+                \begin{subfigure}[b]{0.4\textwidth}
+                    \centering
+                    \includegraphics[width=\textwidth]{Media/bridgenetwork.png}
+                    \caption{Brokobling}
+                    \label{fig:bridgenetwork}
+                \end{subfigure}
+                \hfill
+                \begin{subfigure}[b]{0.7\textwidth}
+                    \centering
+                    \includegraphics[width=\textwidth]{Media/fullwave_recet.png}
+                    \caption{Inn- og utgangssignal i en toveis-likeretter}
+                    \label{fig:fullwave_rect}
+                \end{subfigure}
+                
+                \caption{Toveis likeretter med tilhørende signaler}
+                \label{fig:toveis_likeretter2}
             \end{figure}
-            \begin{align}
-                V_{DC} = \frac{2V_{peak}}{\pi} \label{eq:toveis_likeretter_DC}
-            \end{align}
 
+            Den gjennomsnittlige likespenningen for en ideell toveis likeretter med sinusformet inngangssignal kan uttrykkes som:
+            \begin{align}
+                V_{DC} = \frac{2V_{m}}{\pi} \approx 0.636V_{m}. 
+                \label{eq:toveis_likeretter_DC}
+            \end{align}
+            Her er $V_{m}$ toppverdien til inngangsspenningen. Uttrykket gjelder under forutsetning av en ideell diode uten spenningsfall.
     \subsection{Ripple}
         \subsubsection{Ripple-faktor}
         
