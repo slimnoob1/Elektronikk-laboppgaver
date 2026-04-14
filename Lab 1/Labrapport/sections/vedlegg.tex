@@ -1,3 +1,39 @@
-\section{Vedlegg}
+\section*{Lab V03 beregninger} %IKKE EN DEL AV OPPGAVE V01
 
-    \subsection{Python kode:}
+    \begin{align*}
+        I_B = \frac{V_1 - V_{BE}}{R_3 + R_1(\beta + 1)}
+    \end{align*}
+
+    \begin{align*}
+        I_C = \beta \times \frac{V_1 - V_{BE}}{R_3 + R_1(\beta + 1)}
+    \end{align*}
+
+    \begin{align*}
+        V_E = (1 + \beta) \times R_1 \times \frac{V_1 - V_{BE}}{R_3 + R_1(\beta + 1)}
+    \end{align*}
+
+    \begin{align*}
+        V_{B} = V_{BE} + (1 + \beta)\times R_1 \times \frac{V_1 - V_{BE}}{R_3 + R_1(\beta + 1)}
+    \end{align*}
+
+    \begin{align*}
+        V_C = V_1 - \beta \times R_2 \times \frac{V_1 - V_{BE}}{R_3 + R_1(\beta + 1)}
+    \end{align*}
+
+    \begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    $R_3$ & $I_C$ & $V_B$ & $V_C$ & $V_E$ \\
+    $(k\Omega)$ & $(mA)$ & $(V)$ & $(V)$ & $(V)$ \\
+    \hline
+    200 & 18.91 & 6.96 & -8.36 & 6.26 \\
+    300 & 14.13 & 5.38 & -1.20 & 4.68 \\
+    400 & 11.28 & 4.44 & 3.07 & 3.74 \\
+    500 & 9.39  & 3.81 & 5.91 & 3.11 \\
+    600 & 8.04  & 3.36 & 7.94 & 2.66 \\
+    \hline
+    \end{tabular}
+    \caption{Utregnede verdier for $I_C$, $V_B$, $V_C$ og $V_E$ ved ulike verdier av $R_3$.}
+    \label{tab:transistorverdier}
+    \end{table}
