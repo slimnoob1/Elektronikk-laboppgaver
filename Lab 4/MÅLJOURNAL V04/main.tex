@@ -1,0 +1,94 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{preamble}
+\usepackage[backend=biber]{biblatex}
+
+\DeclareFieldFormat[online]{title}{«#1.»}
+\DeclareFieldFormat{url}{\url{#1}}
+
+\DefineBibliographyStrings{norsk}{
+  urlseen = {}
+}
+
+\DeclareBibliographyDriver{online}{%
+  \printnames{author}%
+  \adddot\space
+  \printfield{title}%
+  \space
+  \printlist{organization}%
+  \adddot\space
+  Hentet fra:\space
+  \printfield{url}%
+  \space
+  (Lastet ned:\space \printurldate)%
+  \finentry
+}
+
+\addbibresource{referanser.bib} % Make sure this matches your .bib file name
+
+% ------ Metadata ------
+\newcommand{\institution}{FHS/Cyberingeniørskolen}
+\newcommand{\laboratory}{Elektronikklaboratoriet}
+\newcommand{\coursecode}{INGXXXX \; XXXX}
+\newcommand{\assignmentno}{H0X}
+\newcommand{\assignmenttype}{LABORATORIERAPPORT}
+\newcommand{\assignmenttitle}{Tittel}
+\newcommand{\studentname}{Kadett navn 1}
+\newcommand{\partnername}{Kadett navn 2}
+\newcommand{\class}{VING 78}
+\newcommand{\labdate}{LABDATO}
+\newcommand{\submissiondate}{\today}
+
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\arabic{section}.\arabic{subsection}.\arabic{subsubsection}}
+
+\numberwithin{equation}{section}
+\titlelabel{\thetitle.\quad}
+
+\begin{document}
+
+\input{frontpage}
+
+\pagenumbering{Roman}
+\setcounter{page}{1}
+
+\input{sections/sammendrag}
+\clearpage
+
+\tableofcontents
+\clearpage
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\input{sections/innledning}
+\clearpage
+
+\input{sections/instrumenter}
+\clearpage
+
+\input{sections/teori}
+\clearpage
+
+\input{sections/gjennomforing}
+\clearpage
+
+\input{sections/diskusjon}
+\clearpage
+
+\input{sections/konklusjon}
+\clearpage
+
+\printbibliography[heading=bibintoc,title={Referanser}]
+\clearpage
+
+\appendix
+\renewcommand{\thesection}{\Alph{section}} % bare A, B, C
+\renewcommand{\thesubsection}{\Alph{section}.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\Alph{section}.\arabic{subsection}.\arabic{subsubsection}}
+%\addcontentsline{toc}{section}{Vedlegg}    % én felles linje i innholdsfortegnelsen
+
+\input{sections/vedlegg}
+\clearpage
+
+\end{document}
