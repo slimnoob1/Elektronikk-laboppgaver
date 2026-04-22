@@ -1,5 +1,5 @@
 \section{Teori}
-    I denne oppgaven skal kretsen vist i figur \ref{fig:circuit} brukes til beregninger. 
+    I denne oppgaven skal kretsen vist i figur \ref{fig:circuit} brukes til beregninger, nærmere bestemt en spenningsdeler krets bias konfigurasjon. 
     \begin{figure}[H]
         \centering
         \includegraphics{Media/transistor_circuit.png}
@@ -10,11 +10,256 @@
     \subsection{Undersøke egenskaper ved spenningsdeler krets}
         Hensikten med denne deloppgaven er å undersøke hvordan endringer i verdier for $I_C$ påvirker $V_C$, $V_E$ og $V_{CE}$. I tillegg undersøke hva som skjer med $I_C$ når spenningen $V_{BE}$ endres.
 
-        \subsubsection{$I_C$ når $V_{BE}$ endres}
-            Ser man på input karakteristikken vist i figur \ref{fig:common_emitter_characteristics}
+        \subsubsection{Strømmen $I_C$ når $V_{BE}$ endres}
+            I figur \ref{fig:common_emitter_characteristics} kan man se input karakteristikken til en transistor koblet med felles-emitter konfigurasjon.
             \begin{figure}[H]
                 \centering
                 \includegraphics{Media/commonemitter_characteristics.png}
                 \caption{Felles-emitter karakteristikk}
                 \label{fig:common_emitter_characteristics}
-            \end{figure}            
+            \end{figure}  
+            
+            Fra figuren ser man at kurven er eksopentiell, slik at når spenningen $V_{BE}$ øker, så øker også strømmen basestrømmen $I_B$ mye. 
+            Fordi sammenehengen mellom $I_B$ og $I_C$ er gitt ved:
+            \begin{equation*}
+                I_C = \beta I_B
+            \end{equation*}
+            resulterer dette i at strømmen gjennom kollektoren $I_C$ øker veldig mye. Dette skyldes at $\beta$ er en verdi fastsatt av produsenten, som i dette eksempelet har en typisk verdi på $290$.
+
+            Det motsatte vil skje dersom dersom $V_{BE}$ avtar, da vil $I_C$ minke veldig mye. 
+
+        \subsubsection{Spenningen $V_C$ dersom $I_C$ endres}
+            Fra kretsen i figur \ref{fig:circuit} kan man utlede følgende uttrykk:
+            \begin{align*}
+                V_{CC} &= R_2 I_C + V_C \\ 
+                \implies V_C &= V_{CC} - R_2 I_C \\ 
+                V_C &= 18V - 5.6k\Omega \cdot I_C.
+            \end{align*}
+
+            Fra uttrykket for $V_C$ ser man tydelig at når $I_C$ øker, så avtar verdien på $V_C$, og motsatt når $I_C$ avtar, da øker verdien på $V_C$.
+
+        \subsubsection{Spenningen $V_E$ når $I_C$ endres}   
+            Videre fra kretsen kan man utlede et uttrykk for spenningen over emitter.
+            \begin{align*}
+                V_E &= R_3 I_E 
+            \end{align*}
+            For en transistor i aktivt område gjelder tilnærmingen $I_E \approx I_C$, som gir 
+            \begin{align*}
+                V_E &= R_3 I_C = 1.2k\Omega \cdot I_C
+            \end{align*}
+
+            Dette viser at spenningen over emittermotstanden er direkte proporsjonal med kollektorstrømmen. En økning i $I_C$ vil derfor føre til en tilsvarende økning i $V_E$, og omvendt.
+
+        \subsubsection{Spenningen $V_{CE}$ dersom $I_C$ endres}
+            For å utlede et uttrykk for spenningen $V_{CE}$ bruker man igjen kretsen som tidligere over kollektor-emitteren.
+            \begin{align*}
+                V_{CC} &= R_2 I_C + V_{CE} + R_3 I_E \\
+                V_{CE} &= V_{CC} - I_C (R_2 + R_3) \\
+                V_{CE} &= 18V - I_C (5.6k\Omega + 1.2k\Omega) = 18V - 6.8k\Omega \cdot I_C
+            \end{align*}
+
+            Uttrykket viser at $V_{CE}$ avtar lineært med økende kollektorstrøm $I_C$. Dette skyldes at spenningsfallet over motstandene øker når strømmen øker, slik at en mindre del av spenningen blir liggende over selve transistoren.
+
+    \subsection{Forsterkning med forskjellige verdier for $R_2$}
+            For å kunne regne med vekselstrøm i kretsen, må man bruke et ekvivalentskjema slik det er vist i figur \ref{fig:ac_eq_circuit}.
+            \begin{figure}[H]
+            \centering
+            \resizebox{0.9\textwidth}{!}{%
+                \begin{circuitikz}
+                \tikzstyle{every node}=[font=\fontsize{10.8pt}{14.1pt}\selectfont]
+                \draw (7.5,4.25) to[R,l={ \fontsize{10.8pt}{14.1pt}\selectfont $R_4$}] (7.5,9.25);
+                \draw (11.25,4.25) to[R,l={ \fontsize{10.8pt}{14.1pt}\selectfont $R_6$}] (11.25,9.25);
+                \draw (16.25,4.25) to[R,l={ \fontsize{10.8pt}{14.1pt}\selectfont $R_3$}] (16.25,6.75);
+                \draw (13.75,9.25) to[R,l={ \fontsize{10.8pt}{14.1pt}\selectfont $\beta r_e$}] (13.75,6.75);
+                \draw (21.25,4.25) to[R,l={ \fontsize{10.8pt}{14.1pt}\selectfont $R_2$}] (21.25,9.25);
+                \draw (18.75,9.25) to[american controlled current source,l={ \fontsize{10.8pt}{14.1pt}\selectfont $\beta I_b$}] (18.75,6.75);
+                \draw (7.5,9.25) to[short] (13.75,9.25);
+                \draw (13.75,6.75) to[short] (18.75,6.75);
+                \draw (18.75,9.25) to[short] (25,9.25);
+                \draw (7.5,9.25) to[short] (3.75,9.25);
+                \node [font=\fontsize{18.2pt}{23.7pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (3.75,6.75) {$V_1$};
+                \node [font=\fontsize{18.2pt}{23.7pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (25,6.625) {$V_0$};
+                \node [font=\fontsize{18.2pt}{23.7pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (4.875,6.375) {$Z_i$};
+                \node [font=\fontsize{18.2pt}{23.7pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (23.75,6.125) {$Z_0$};
+                \node [font=\fontsize{18.2pt}{23.7pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (12.875,6.25) {$Z_b$};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (8.25,6.625) {$82k\Omega$};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (12,6.625) {$22k\Omega$};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (17,5.5) {$1.2k\Omega$};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (22.125,6.75) {$5.6k\Omega$};
+                \draw [-{Stealth[scale=1.5]}, ] (5.375,6.375) -- (6.125,6.375);
+                \draw [-{Stealth[scale=1.5]}, ] (13.25,6.125) -- (14.375,6.125);
+                \draw [-{Stealth[scale=1.5]}, ] (23.25,6.25) -- (22.125,6.25);
+                \node [font=\fontsize{18.2pt}{23.7pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (3.875,8.75) {$+$};
+                \node [font=\fontsize{18.2pt}{23.7pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.000cm] at (3.75,4.75) {$-$};
+                \node [font=\fontsize{18.2pt}{23.7pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (24.875,8.75) {$+$};
+                \node [font=\fontsize{18.2pt}{23.7pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.000cm] at (24.875,4.75) {$-$};
+                \draw [short] (3.75,4.25) -- (25,4.25);
+                \draw (5.625,4.25) to (5.625,3.625) node[ground]{};
+                \draw (23.125,4.25) to (23.125,3.625) node[ground]{};
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (11.875,9.25) -- (13.25,9.25);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (16.25,6.75) -- (16.25,6);
+                \draw [ color={rgb,255:red,255; green,0; blue,0}, draw opacity=1, -{Stealth[scale=1.5]}, ] (21,9.25) -- (19.75,9.25);
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, color={rgb,255:red,255; green,0; blue,0}, text opacity=1, , inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.010cm] at (12.375,8.875) {$I_b$};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, color={rgb,255:red,255; green,0; blue,0}, text opacity=1, , inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.002cm] at (16.625,6.375) {$I_e$};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, color={rgb,255:red,255; green,0; blue,0}, text opacity=1, , inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.002cm] at (20.125,8.875) {$I_c$};
+                \begin{scope}[transparency group, opacity=1]
+                \node at (16.25,6.5) [circ, color={rgb,255:red,255; green,0; blue,0}] {};
+                \end{scope}
+                \begin{scope}[transparency group, opacity=1]
+                \node at (20.875,9.25) [circ, color={rgb,255:red,255; green,0; blue,0}] {};
+                \end{scope}
+                \begin{scope}[transparency group, opacity=1]
+                \node at (11.625,9.25) [circ, color={rgb,255:red,255; green,0; blue,0}] {};
+                \end{scope}
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, color={rgb,255:red,255; green,0; blue,0}, text opacity=1, , inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.000cm] at (11.625,8.875) {$b$};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, color={rgb,255:red,255; green,0; blue,0}, text opacity=1, , inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.000cm] at (15.75,6.375) {$e$};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, color={rgb,255:red,255; green,0; blue,0}, text opacity=1, , inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.000cm] at (20.875,8.875) {$c$};
+                \end{circuitikz}
+            }%
+            \caption{AC-ekvivalent krets}
+            \label{fig:ac_eq_circuit}
+            \end{figure}
+
+            Fra kretsen over kan man utlede et uttrykk for forsterkningen $A_V$ som funksjon av motstanden $R_2$.
+            \begin{align*}
+                A_V = \frac{V_0}{V_1} = \frac{-Z_0 I_c}{Z_b I_b} = -\frac{\beta Z_0 I_b}{Z_b I_b} = -\frac{\beta Z_0}{Z_b}
+            \end{align*}
+
+            Utgangsimpedansen $Z_0$ vil kun være lik $R_2$. Impedansen $Z_b$ vil være lik den totale impedansen over $\beta r_e$ og $R_3$. Men siden $I_e$ går gjennom $R_3$ og ikke $I_b$, må man endre på uttrykket ved å bruke sammenhengen $I_e = (1+ \beta)I_b$. Da finner man et uttrykk for $Z_b$:
+            \begin{align*}
+                Z_b &= \frac{V_1}{I_b} = \frac{\beta I_b r_e + I_e R_3}{I_b} =\frac{\beta I_b r_e + (1 + \beta)I_b R_3}{I_b} approx \frac{\beta I_b(r_e + R_3)}{I_b} \\
+                Z_b &= \beta (r_e + R_3).
+            \end{align*}
+
+            Setter så dette inn igjen i uttrykket for forsterkningen:
+            \begin{align*}
+                A_V = -\frac{\beta R_2}{\beta (r_e + R_3)} = -\frac{R_2}{r_e + R_3}.
+            \end{align*}
+
+            Siden tilnærmingen $R_3 >> r_e$ gjelder kan $r_e$ neglisjeres. Da er uttrykket for forsterkningen lik
+
+            \begin{align} 
+                A_V = -\frac{R_2}{R_3} = -\frac{R_2}{1.2k\Omega}. \label{eq:forsterkning}
+            \end{align}
+
+            Forsterkningen for forskjellige verdier av $R_2$ er presentert i tabell \ref{tab:forsterkning1}.
+            \begin{table}[h]
+                \centering
+                \caption{Forsterkning med forskjellige verdier for $R_2$}
+                \label{tab:forsterkning1}
+                \begin{tabular}{|c|c|c|}
+                    \hline
+                    \rowcolor[gray]{0.9}
+                    \textbf{$R_2 [k\Omega]$} & \textbf{$A_V$} & \textbf{Faseskift} \\ \hline
+                    4.7                      & 3.92           & $\ang{180}$ \\ \hline
+                    5.6                      & 4.67           & $\ang{180}$ \\ \hline
+                    6.8                      & 5.67           & $\ang{180}$ \\ \hline
+                \end{tabular}
+            \end{table}
+
+            Her kan man observere at det er et faseskift på $\ang{180}$ mellom inngangs- og utgangssignalet, noe som stemmer med den negative forsterkningen i likning \eqref{eq:forsterkning}. 
+            Man kan observere en sammenheng mellom størrelsen på $R_2$ og forsterkningen ved utgangen. Når $R_2$ øker, så øker også forsterkningen.
+
+            Kondensatorene $C_4$ og $C_5$ sørger for at kun vekselstrømssignaler overføres mellom de ulike delene av kretsen.
+
+            Kondensatoren $C_4$ blokkerer likestrøm fra kilden fordi en kondensator oppfører seg som en åpen krets for likestrøm. Samtidig tillater den vekselstrøm å passere, siden den kontinuerlig lades og utlades når spenningen varierer. Dette gjør at kun AC-signalet fra inngangen påvirker transistoren.
+
+            Tilsvarende sørger $C_5$ for at likestrøm fra transistorens utgang ikke føres videre. Den slipper kun gjennom vekselstrømskomponenten av signalet, slik at utgangen representerer det forsterkede AC-signalet.
+
+        \subsection{Forsterkning med forbigått $R_3$}
+            Dersom man kobler en kondensator i parallell med $R_3$, så bypasses motstanden fordi AC-signalet vil gå minste motstands vei, altså gjennom kondensatoren. Man kan da se på $R_3$ som en åpen krets i AC-ekvivalentkretsen.
+            Som en konsekvens av dette vil dette øke forsterkningen ettersom signalet ikke dempes av $R_3$. Formelen for forsterkning vil da være:
+            \begin{align*}
+                A_V = -\frac{R_2}{r_e},
+            \end{align*} 
+            der $r_e$ er lik
+            \begin{align*}
+                r_e = \frac{26mV}{I_E} = \frac{26mV}{(1+\beta)I_B}
+            \end{align*}
+
+            For å regne ut $I_B$ må man gjøre om på kretsen i figur \ref{fig:circuit}, for å så finne Thevenin-ekvivalenten. Da benyttes kretsen i figur \ref{fig:dc_circuit}. $\beta$ settes til lik $290$.
+            \begin{figure}[H]
+                \centering
+                \resizebox{1\textwidth}{!}{%
+                \begin{circuitikz}
+                \tikzstyle{every node}=[font=\fontsize{10.8pt}{14.1pt}\selectfont]
+                \draw (13.75,4.25) to[Tnpn, transistors/scale=1.19] (13.75,6.75);
+                \draw (12.75,5.5) to[short] (11.25,5.5);
+                \draw (11.25,5.5) to[R,l={ \fontsize{10.8pt}{14.1pt}\selectfont $R_6$}] (11.25,3);
+                \draw (8.75,5.5) to[R,l={ \fontsize{10.8pt}{14.1pt}\selectfont $R_4$}] (11.25,5.5);
+                \draw (8.75,5.5) to[battery ,l={ \fontsize{10.8pt}{14.1pt}\selectfont 18V}] (8.75,3);
+                \draw (13.75,4.25) to[R,l={ \fontsize{10.8pt}{14.1pt}\selectfont $R_3$}] (13.75,3);
+                \draw (8.75,3) to (8.75,2.875) node[ground]{};
+                \draw (11.25,3) to (11.25,2.875) node[ground]{};
+                \draw (13.75,3) to (13.75,2.875) node[ground]{};
+                \draw (13.75,6.75) to[R,l={ \fontsize{10.8pt}{14.1pt}\selectfont $R_2$}] (13.75,8);
+                \draw (13.875,8) to[battery ,l={ \fontsize{10.8pt}{14.1pt}\selectfont 18V}] (13.875,9.25);
+
+                \draw (13.875,9.25) to (12.375,9.25) node[ground]{};
+
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (10,5) {82k$\Omega$};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (10.625,4.125) {$22k\Omega$};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (13,3.625) {1.2k$\Omega$};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (14.625,7.375) {5.6k$\Omega$};
+                \begin{scope}[transparency group, opacity=1]
+                \node at (13.75,4.875) [circ, color={rgb,255:red,0; green,0; blue,0}] {};
+                \end{scope}
+                \begin{scope}[transparency group, opacity=1]
+                \node at (13.75,6.125) [circ, color={rgb,255:red,0; green,0; blue,0}] {};
+                \end{scope}
+                \begin{scope}[transparency group, opacity=1]
+                \node at (12.875,5.5) [circ, color={rgb,255:red,0; green,0; blue,0}] {};
+                \end{scope}
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.007cm] at (12.875,5.25) {$B$};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.000cm] at (13.375,4.75) {$E$};
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.007cm] at (14.125,6.125) {$C$};
+                \draw (13.75,6.375) to[short, -o] (15.75,6.375) ;
+                \node [font=\fontsize{10.8pt}{14.1pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (15.75,6) {$V_0$};
+                \end{circuitikz}
+                }%
+                \caption{Transistorkrets for videre beregninger}
+                \label{fig:dc_circuit}
+            \end{figure}
+
+            Først finner man Thevenin-motstanden:
+            \begin{align*}
+                R_{Th} = \frac{R_4 R_6}{R_4 + R_6} = \frac{82k\Omega \cdot 22k\Omega}{82k\Omega + 22k\Omega} = 17346\Omega.
+            \end{align*}
+
+            Videre regnes Thevenin-spenningen ut:
+            \begin{align*}
+                V_{Th} = V_1 \frac{R_6}{R_4 + R_6} = 18V \frac{22k\Omega}{82k\Omega + 22k\Omega} = 3.81V.
+            \end{align*}
+
+            Deretter bruker man resultatene til å regne ut $I_B$, så $I_E$:
+            \begin{align*}
+                V_{Th} &= R_{Th}I_B + V_{BE} + R_3 I_E \\
+                \implies I_B &= \frac{V_{Th} - V_{BE}}{R_{Th} + (1 + \beta)R_3} = \frac{3.81V - 0.7V}{17346\Omega +291\cdot 1.2k\Omega} \\
+                I_B &= 8.48\mu A\\
+                \implies I_E &= (1 + \beta)I_B = 291\cdot 8.48\mu A = 2.47mA. 
+            \end{align*}
+
+            Den dynamiske emittermotstanden $r_e$ tilsvarer da
+            \begin{align*}
+                r_e = \frac{26mV}{I_E} = \frac{26mV}{2.47mA} = 10.53\Omega.
+            \end{align*}
+
+            Det nye uttrykket for forsterkningen kan da uttrykkes som:
+            \begin{align*}
+                A_V = -\frac{R_2}{10.53\Omega}
+            \end{align*}
+
+            Når $R_2$ varieres med de samme verdiene som tidligere, blir forsterkningen enda høyere. Dette er presentert i tabell \ref{tab:forsterkning2}.
+            \begin{table}[h]
+                \centering
+                \caption{Forsterkning med forskjellige verdier for $R_2$, men med $R_3$ bypassed.}
+                \label{tab:forsterkning2}
+                \begin{tabular}{|c|c|c|}
+                    \hline
+                    \rowcolor[gray]{0.9}
+                    \textbf{$R_2 [k\Omega]$} & \textbf{$A_V$} & \textbf{Faseskift} \\ \hline
+                    4.7                      & 446           & $\ang{180}$ \\ \hline
+                    5.6                      & 531           & $\ang{180}$ \\ \hline
+                    6.8                      & 645           & $\ang{180}$ \\ \hline
+                \end{tabular}
+            \end{table}
