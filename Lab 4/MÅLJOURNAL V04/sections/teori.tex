@@ -1,5 +1,7 @@
 \section{Teori}
-    I denne oppgaven skal kretsen vist i figur \ref{fig:circuit} brukes til beregninger, nærmere bestemt en spenningsdeler krets bias konfigurasjon. 
+    I denne oppgaven skal kretsen vist i figur \ref{fig:circuit} brukes til beregninger, nærmere bestemt felles emitter-forsterker med spenningsdeler-bias. 
+    
+    Fordi man har en motstand $R_6$ koblet til, så er dette en spenningsdeler-bias, fordi strømmen som går fra spenningskilden $V_1$ og gjennom $R_4$ ikke er den samme som base-strømmen $I_B$ til transistoren. For å gjøre ytterligere beregninger på kretsen er det nødvendig å finne Thevenin-ekvivalentkretsen.
     \begin{figure}[H]
         \centering
         \includegraphics{Media/transistor_circuit.png}
@@ -127,7 +129,7 @@
 
             Utgangsimpedansen $Z_0$ vil kun være lik $R_2$. Impedansen $Z_b$ vil være lik den totale impedansen over $\beta r_e$ og $R_3$. Men siden $I_e$ går gjennom $R_3$ og ikke $I_b$, må man endre på uttrykket ved å bruke sammenhengen $I_e = (1+ \beta)I_b$. Da finner man et uttrykk for $Z_b$:
             \begin{align*}
-                Z_b &= \frac{V_1}{I_b} = \frac{\beta I_b r_e + I_e R_3}{I_b} =\frac{\beta I_b r_e + (1 + \beta)I_b R_3}{I_b} approx \frac{\beta I_b(r_e + R_3)}{I_b} \\
+                Z_b &= \frac{V_1}{I_b} = \frac{\beta I_b r_e + I_e R_3}{I_b} =\frac{\beta I_b r_e + (1 + \beta)I_b R_3}{I_b} \approx \frac{\beta I_b(r_e + R_3)}{I_b} \\
                 Z_b &= \beta (r_e + R_3).
             \end{align*}
 
@@ -177,7 +179,7 @@
                 r_e = \frac{26mV}{I_E} = \frac{26mV}{(1+\beta)I_B}
             \end{align*}
 
-            For å regne ut $I_B$ må man gjøre om på kretsen i figur \ref{fig:circuit}, for å så finne Thevenin-ekvivalenten. Da benyttes kretsen i figur \ref{fig:dc_circuit}. $\beta$ settes til lik $290$.
+            For å regne ut $I_B$ må man gjøre om på kretsen i figur \ref{fig:circuit}, for å så finne Thevenin-ekvivalenten. Da benyttes kretsen i figur \ref{fig:dc_circuit}, som er DC-ekvivalentkretsen. $\beta$ settes til lik $290$ slik som databladet sier. 
             \begin{figure}[H]
                 \centering
                 \resizebox{1\textwidth}{!}{%

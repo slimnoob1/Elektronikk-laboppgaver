@@ -1,43 +1,257 @@
 \section{Gjennomføring med måleresultater}
-    $\beta = 319$
     \subsection{FE-forsterker med emittermotstand}
-        \subsubsection{Forsterkning/faseforsyvning}
-            a. Q=(1.34V, 2.51mA) (1.00V, 2.51mA) (første gang)
+        På laboratoriet ble kretsen koblet opp i henhold til koblingsskjemaet som vist i figur \ref{fig:circuit1}. Spenningskilden $V2$ stilles inn med en frekvens på $5kHz$ og en vekselspenning tilsvarende $300mV$ topp-til-topp.
+        \begin{figure}[H]
+            \centering
+            \includegraphics{Media/circuit2.PNG}
+            \caption{Transistorkrets med spenningsdeler-bias}
+            \label{fig:circuit1}
+        \end{figure}
+        \subsubsection{Forsterkning og faseforsyvning}
+            Spenningskilden $V2$ kobles ikke til enda da man ønsker å finne transistorens arbeidspunkt. Måler man transistorens arbeidspunkt får man følgende verdier presentert i tabell \ref{tab:arbeidspunkt}:
+            \begin{table}[H]
+                \centering
+                \caption{Transistorens arbeidspunkt}
+                \label{tab:arbeidspunkt}
+                \begin{tabular}{|c|c|}
+                    \hline
+                    \rowcolor[gray]{0.9}
+                    \textbf{Hva} & \textbf{Verdi} \\ \hline
+                    Strømforsterkning $\beta$ & 319 \\ \hline
+                    Kollektor-emitter spenning $V_{CE}$ & $1.00V$ \\ \hline
+                    Kollektorstrøm $I_C$ & $2.51mA$ \\ \hline
+                \end{tabular}
+            \end{table}
+            Transistorens arbeidspunkt er $Q=(V_{CE}, I_C) = (1.00V, 2.51mA)$.  
 
-            b. 180 grader faseforsyvning. Se bilde for forsterkning
+            Videre så kobles $V_2$ inn i kretsen, og måleprobene på oscilloskopet kobles til basis og kollektor på transistoren. Resultatet presenteres i figur \ref{fig:1} under. På grunn av små problemer med oscilloskopet så er kurvene ikke i samme skala.
 
-            c. Forsterkningen blir den samme. 
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1.0\textwidth]{Media/1.jpeg}
+            \caption{Signalene til basis og kollektor}
+            \label{fig:1}
+        \end{figure}
 
-            d. faseforsyvningen er den samme. Forsterkningen er omtrent lik 1. 
+        \begin{table}[H]
+            \centering
+            \caption{Verdier målt på oscilloskopet for basis (gul) og kollektor (blå)}
+            \label{tab:verdier_fig1}
+            \begin{tabular}{|c|c|c|c|}
+                \hline
+                \rowcolor[gray]{0.9}
+                \textbf{Målepunkt} & \textbf{Verdi (Pk-Pk)} & \textbf{DC-nivå} &\textbf{Ampitude} \\ \hline
+                Basis & $296mV$ & \empty & $148mV$\\ \hline
+                Kollektor & $1.32V$ & $4.32V$ & $0.66V$ \\ \hline
+            \end{tabular}
+        \end{table}        
+
+        Forsterkningen mellom basis og kollektor kan fra resultatene regnes ut.
+        \begin{equation*}
+            A_V = \frac{V_0}{V_1} = \frac{0.66V}{148mV} = 4.46.
+        \end{equation*}
+
+        Fra figur \ref{fig:1} ser man klart og tydelig at faseforsyvningen mellom basisspenningen og kollektorspenningen er $\ang{180}$.
+
+        Når signalgeneratoren $V_2$ påtrykker et AC-signal gir det store endringer på utgangen. I \textbf{posistiv halvperiode} så øker innsignalet $V_i$ og utsignalet $V_o$ går ned. Spenningen mellom base og emitter bare øker litt frem til terkselverdien på omtrent $0.7V$. Da vil transistoren i sin helhet begynne å lede strøm. Kollektorstrømmen $I_C$ øker, og da vil kollektorspenningen $V_C$ synke. Siden kollektorstrømmen øker, så vil også emitterspenningen øke fordi disse er proporsjonale. 
+
+        I \textbf{negativ halvperiode} blir innsignalet negativt og utsignalet går opp. Altså det motsatte vil skje. Dette kommer til syne i oscilloskopet, da disse to signalene er invertert $\ang{180}$. 
+
+        En lastmotstand på $1M\Omega$ blir så koblet til lasten, og dersom man flytter måleprobene til $V_i$ og $V_o$ får man akkurat samme resultat på oscilloskopet som tidligere. Foruten om at DC-nivået var lik 0. Dette vil tilsi at hensikten til kondensatorene $C4$ og $C5$ er at de blokkerer DC-spenning fra å passere inn- og ut av kretsen ved $V_i$ og $V_o$. 
+        
+        Dersom man flytter måleprobene til basis og emitter, får man følgende resultat som vist i figur \ref{fig:2} under:
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1.0\textwidth]{Media/2.jpeg}
+            \caption{Basisspenningen (gul) og emitterspenningen (blå)}
+            \label{fig:2}
+        \end{figure}
+
+        Fra oscilloskopet observerer man at faseforsyvningen mellom basis og emitter er lik $\ang{0}$. Videre er forsterkningen mellom basis og emitter lik
+        \begin{equation*}
+            A_V = \frac{V_0}{V_1} = \frac{320mV}{296mV} = 1.08 \approx 1.
+        \end{equation*}
 
         \subsubsection{Kollektormotstandens innvirkning}
-            a. 4.25V
+            Her skal forsterkningen undersøkes når man endrer på verdien til kollektormotstanden $R_{18}$ med en dekademotstand. Kretsen ble koblet opp i henhold til koblingsskjemaet slik som i figur \ref{fig:4}.   
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.9\textwidth]{Media/4.PNG}
+                \caption{Forsterkerkobling med variabel kollektormotstand}
+                \label{fig:4}
+            \end{figure}
 
-            b. Når R18 justeres oppover så minker spenningen $V_C$. Samme bare motsatt når R18 justeres nedover.
+            Dersom dekademotstanden settes til $5.6k\Omega$ får man følgende resulat:
+            \begin{table}[H]
+                \centering
+                \caption{Kollektorspenning med fastsatt kollektormotstand}
+                \label{tab:kollektormostand1}
+                \begin{tabular}{|c|c|}
+                    \hline
+                    \rowcolor[gray]{0.9}
+                    \textbf{Motstand $R_{18}$} & \textbf{$V_C$} \\ \hline
+                    $5.6k\Omega$ & $4.25V$ \\ \hline
+                \end{tabular}
+            \end{table}
 
-            c. $R_{18}$ = 4.7k : $\frac{2.32V}{600mV} = 3.86$ , $R_{18} = 5.6k$ : $\frac{2.60V+0.2V}{600mV} = 4.67$. 
+            Justerer man $R_{18}$ ytterligere så ser man endringen i $V_C$ enda klarere. $R_{18}$ justeres både oppover og nedover fra $5.6k\Omega$.
+            \begin{table}[H]
+                \centering
+                \caption{Effekten på $V_C$ når $R_{18}$ justeres}
+                \label{tab:kollektormostand2}
+                \begin{tabular}{|c|c|}
+                    \hline
+                    \rowcolor[gray]{0.9}
+                    \textbf{Endring på $R_{18}$} & \textbf{$V_C$} \\ \hline
+                    $R_{18}$ minker & $V_C$ øker \\ \hline 
+                    $R_{18}$ øker & $V_C$ minker \\ \hline
+                \end{tabular}
+            \end{table}
 
-            c1. Forsterkeren begynner å klippe når $V_i > 400mV$.
+            Så kobles signalgeneratoren til, og innsignalet stilles til et sinussignal med  frekvens på $5kHz$. Måleprobene måler over $V_i$ og $V_o$. Forsterkeren begynner å klippe innsignalet ved omtrent $400mV$pp, slik at dette brukes som utgangspunkt i de neste målingene. 
+            
+            I tabell \ref{tab:forsterkning_kollektormotstand_real} ser man effekten på forsterkningen av forskjellige verdier for $R_{18}$.
+            \begin{table}[H] %SJEKK UT PÅ NYTT
+                \centering
+                \caption{Forsterkningen for forskjellige verdier av $R_{18}$}
+                \label{tab:forsterkning_kollektormotstand_real}
+                \begin{tabular}{|c|c|c|c|c|}
+                    \hline
+                    \rowcolor[gray]{0.9}
+                    \textbf{$R_{18}$} & \textbf{$V_i$ (Pk-Pk)} & \textbf{$V_o$ (Pk-Pk)} & \textbf{Forsterkning} & \textbf{Prosentvis avvik}\\ \hline
+                    $4.7k\Omega$ & $600mV$ & $2.32V$ & $3.86$ & 1.53\% \\ \hline
+                    $5.6k\Omega$ & $600mV$ & $2.80V$ & $4.67$ & 0\% \\ \hline
+                    $6.8k\Omega$ & $600mV$ & $3.42V$ & $5.70$ & 0.53\% \\ \hline
+                \end{tabular}
+            \end{table}
+            \begin{table}[H]
+                \centering
+                \caption{Forsterkningen for forskjellige verdier av $R_{18}$}
+                \label{tab:forsterkning_kollektormotstand_fake}
+                \begin{tabular}{|c|c|c|c|c|}
+                    \hline
+                    \rowcolor[gray]{0.9}
+                    \textbf{$R_{18}$} & \textbf{$V_i$ (Pk-Pk)} & \textbf{$V_o$ (Pk-Pk)} & \textbf{Forsterkning} & \textbf{Prosentvis avvik}\\ \hline
+                    $4.7k\Omega$ & $400mV$ & $1.54V$ & $3.86$ & 1.53\% \\ \hline
+                    $5.6k\Omega$ & $400mV$ & $1.87V$ & $4.67$ & 0\% \\ \hline
+                    $6.8k\Omega$ & $400mV$ & $2.28V$ & $5.70$ & 0.53\% \\ \hline
+                \end{tabular}
+            \end{table}
 
-            c2. Arbeidspunktet er for lavt. 
+            I negativ halvperiode klippes signalet når $V_i \gtrsim 400mV$pp når $R_{18} = 5.6k\Omega$. Transistoren mettes og er ikke lenger i stand til å følge det påtrykte signalet fra $V_2$. For å kompensere for det klipte signalet er det nødvendig å anslå topp-til-topp spenningen ved å telle antall forventede ruter på den klipte kurven på  oscilloskopet for å kunne få et reelt estimat. 
 
-            c3.
+        \subsubsection{Inngangsimpedans}
+            Kretsen i figur \ref{fig:5} kobles opp, denne gang med en dekademotstand $R_{16}$ i serie med $V_2$. På denne måten er det mulig å måle inngangsimpedansen for transistorkretsen ved hjelp av halveringsmetoden.
+           \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.8\textwidth]{Media/5.PNG}
+                \caption{Oppkobling for måling av inngangsimpedans}
+                \label{fig:5}
+            \end{figure}   
+            
+            Dekademotstanden settes initielt til $0\Omega$ slik at det er maksimalt spenningsfall over forsterkeren. Motstanden økes helt frem til spenningen over FE-forsterkeren halveres. Når spenningen over FE-forsterkeren er halvert, så vil det være like stort spenningsfall over dekademotstanden som for hele FE-forsterkeren. Altså da er dekademotstanden lik inngangsimpedansen, fordi det i praksis vil være en spenningsdeler med dekademotstanden i serie med inngangsimpedansen til FE-forsterkeren.
+            
+           \begin{table}[H]
+                \centering
+                \caption{Inngangsimpedansen til FE-forsterkeren}
+                \label{tab:inngangsimpedans1}
+                \begin{tabular}{|c|c|}
+                    \hline
+                    \rowcolor[gray]{0.9}
+                    \textbf{$R_{16}$} & \textbf{$V_i$ [Pk-Pk]}  \\ \hline
+                    $0\Omega$ & $500mV$ \\ \hline 
+                    $19k\Omega$ & $250mV$ \\ \hline
+                \end{tabular}
+            \end{table}
 
-        \subsubsection{Inngangsimpedans}    
-            a. Forklar
- 
-            b. Forklar
-
-            c. Starter på 500mV. Amplituden halveres på $R_{16} = 19k\Omega$.
+            Fra tabell \ref{tab:inngangsimpedans1} ser man at når spenningen går fra $500mV$pp til $250mV$ppm, er $R_{16}$ lik $19k\Omega$. Dermed er utgangsimpedansen $Z_i$ til FE-forsterkeren lik $19k\Omega$. 
 
         \subsubsection{Utgangsimpedans}
-            a. Forklar
- 
-            b. Forklar
+            For å måle utgangsimpedansen for kretsen i figur \ref{fig:6} benyttes igjen halveringsmetoden. Med oscilloskopet måles utgangen $V_o$ og dekademotstanden er stilt inn til sitt maksimum. Dekademotstanden skal reduseres gradvis helt til spenningen ved utgangen har blitt redusert til halvparten. Da vil dekademotstanden være omtrent lik utgangsimpedansen til FE-forsterkeren.
+            Igjen skyldes dette fordi det i prinsippet bare er en spenningsdeler med to like store motstander.
+           \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.8\textwidth]{Media/6.PNG}
+                \caption{Oppkobling for måling av utgangsimpedans}
+                \label{fig:6}
+            \end{figure}  
 
-            c. $V_i = 300mV$, Utgangsimpedansen til forsterkeren er $Z_0 = 5.1k\Omega$. Da er målespenningen halvert. 
+           \begin{table}[H]
+                \centering
+                \caption{Utgangsimpedansen til FE-forsterkeren}
+                \label{tab:utgangsimpedans1}
+                \begin{tabular}{|c|c|}
+                    \hline
+                    \rowcolor[gray]{0.9}
+                    \textbf{$R_{15}$} & \textbf{$V_o$ [Pk-Pk]}  \\ \hline
+                    $11111110\Omega$ & $300mV$ \\ \hline 
+                    $5.1k\Omega$ & $150mV$ \\ \hline
+                \end{tabular}
+            \end{table}           
+            
+            Fra tabell \ref{tab:utgangsimpedans1} ser man at når utgangsspenningen går fra $300mV$pp til $150mV$ppm, er $R_{15}$ lik $5.1k\Omega$. Dermed er inngangsimpedansen $Z_o$ til FE-forsterkeren lik $5.1k\Omega$.
 
     \subsection{FE-forsterker med avkoblet emittermotstand}
-        1. Arbeidspunktet er det samme $Q = (1.0V, 2.58mA)$
+        Kretsen i figur \ref{fig:7} ble koblet opp i henhold til koblingsskjemaet under. 
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.9\textwidth]{Media/7.PNG}
+            \caption{FE-trinn med avkoblet emittermotstand}
+            \label{fig:7}
+        \end{figure}     
 
-        2. $A_V = \frac{12.5V}{25mV}$ = 500. 180 grader faseskift
+        Emittermotstanden $R_5$ blir avkoblet fordi man nå plasserer en kondensator $C_3$ i parallell med $R_5$. Signalgeneratoren $V_1$ stilles til å sende et sinussignal med en frekvens på $5kHz$.
+
+        For å finne forsterkerens arbeidspunkt kobles $V_1$ ut. Resultatene presenteres i tabell \ref{tab:bypass}.
+        \begin{table}[H]
+            \centering
+            \caption{Arbeidspunktet til transistoren med emittermotstanden forbigått}
+            \label{tab:bypass}
+            \begin{tabular}{|c|c|}
+                \hline
+                \rowcolor[gray]{0.9}
+                \textbf{Målepunkt} & \textbf{Verdi}  \\ \hline
+                $V_{CE}$ & $1.0V$ \\ \hline 
+                $I_C$ & $2.58mA$ \\ \hline
+            \end{tabular}
+        \end{table}  
+
+        Med en så lav inngangsspenning vil det være mye synlig støy i oscilloskopet. Dette kommer godt frem i figur \ref{fig:3}. Fra den samme figuren kan forsterkningen regnes ut. Fordi den gule kurven klippes, er det igjen nødvendig å legge til det komplette forventede sinussignalet. 
+        Det kommer til syne $7.00V$pp i oscilloskopet, men når man legger til $2.5V$ så fullfører man sinussignalet.
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.9\textwidth]{Media/3.jpeg}
+            \caption{$V_i$ og $V_o$ for tilhørende krets}
+            \label{fig:3}
+        \end{figure}
+        
+        Resultatene fra figur \ref{fig:3} er presentert i tabell \ref{tab:bypass1}.
+        \begin{table}[H]
+            \centering
+            \caption{Forsterkningen til FE-forsterkeren}
+            \label{tab:bypass1}
+            \begin{tabular}{|c|c|}
+                \hline
+                \rowcolor[gray]{0.9}
+                \textbf{Målepunkt} & \textbf{Verdi} \\ \hline
+                $V_o$ & $7.00V (+ 2.5V)$ \\ \hline 
+                $V_i$ & $30mV$ \\ \hline
+            \end{tabular}
+        \end{table}  
+
+        Faseforsyvningen mellom inn- og utgangssignalet er $\ang{180}$. Forsterkningen i FE-forsterkeren vil da være lik:
+        \begin{equation*}
+            A_V = \frac{12.5V}{30mV} = 500.
+        \end{equation*}
+
+        Fra teorien tilsvarer det et prosentvis avvik på:
+        \begin{equation*}
+            Avvik_{\%} = \left| \frac{500 - 531}{531} \right| \times 100\% = 5.84\%. 
+        \end{equation*}
+
+        Når $R_5$ forbigås av en kondensator, oppnås en betydelig høyere spenningsforsterkning sammenlignet med tilfellet der $R_5$ ikke er parallellkoblet med en kondensator. 
+
+        Avviket skyldes at det er vanskelig å fastslå nøyaktig hvor mye spenning man faktisk må legge til for å fullføre signalet. $2.5V$ er kun et omtrentlig estimat, men nærme nok til å få frem poenget med forsterkning når emittermotstanden forbigås.
+        
+        
