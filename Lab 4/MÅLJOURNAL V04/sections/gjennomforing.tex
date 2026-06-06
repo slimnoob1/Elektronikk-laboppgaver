@@ -25,6 +25,7 @@
             Transistorens arbeidspunkt er $Q=(V_{CE}, I_C) = (1.00V, 2.51mA)$.  
 
             Videre så kobles $V_2$ inn i kretsen, og måleprobene på oscilloskopet kobles til basis og kollektor på transistoren. Resultatet presenteres i figur \ref{fig:1} under. På grunn av små problemer med oscilloskopet så er kurvene ikke i samme skala.
+            DC-nivået til basisspenningen er dessverre ikke mulig å lese av fra oscilloskopet grunnet en menneskelig feil hos de som utførte forsøkene på laboratoriet. 
 
         \begin{figure}[H]
             \centering
@@ -41,12 +42,12 @@
                 \hline
                 \rowcolor[gray]{0.9}
                 \textbf{Målepunkt} & \textbf{Verdi (Pk-Pk)} & \textbf{DC-nivå} &\textbf{Ampitude} \\ \hline
-                Basis & $296mV$ & \empty & $148mV$\\ \hline
+                Basis & $296mV$ & $\varnothing$ & $148mV$\\ \hline
                 Kollektor & $1.32V$ & $4.32V$ & $0.66V$ \\ \hline
             \end{tabular}
         \end{table}        
 
-        Forsterkningen mellom basis og kollektor kan fra resultatene regnes ut.
+        Forsterkningen mellom basis og kollektor kan fra resultatene over regnes ut.
         \begin{equation*}
             A_V = \frac{V_0}{V_1} = \frac{0.66V}{148mV} = 4.46.
         \end{equation*}
@@ -94,7 +95,7 @@
                 \end{tabular}
             \end{table}
 
-            Justerer man $R_{18}$ ytterligere så ser man endringen i $V_C$ enda klarere. $R_{18}$ justeres både oppover og nedover fra $5.6k\Omega$.
+            Kollektorspenningen måles til $V_C = 4.25V$. Justerer man $R_{18}$ ytterligere så ser man endringen i $V_C$ enda klarere. $R_{18}$ justeres både oppover og nedover fra $5.6k\Omega$.
             \begin{table}[H]
                 \centering
                 \caption{Effekten på $V_C$ når $R_{18}$ justeres}
@@ -108,7 +109,7 @@
                 \end{tabular}
             \end{table}
 
-            Så kobles signalgeneratoren til, og innsignalet stilles til et sinussignal med  frekvens på $5kHz$. Måleprobene måler over $V_i$ og $V_o$. Forsterkeren begynner å klippe innsignalet ved omtrent $400mV$pp, slik at dette brukes som utgangspunkt i de neste målingene. 
+            Så kobles signalgeneratoren til, og innsignalet stilles til et sinussignal med  frekvens på $5kHz$. Måleprobene måler over $V_i$ og $V_o$. Forsterkeren begynner å klippe innsignalet ved omtrent $600mV$pp, slik at dette brukes som utgangspunkt i de neste målingene. 
             
             I tabell \ref{tab:forsterkning_kollektormotstand_real} ser man effekten på forsterkningen av forskjellige verdier for $R_{18}$.
             \begin{table}[H] %SJEKK UT PÅ NYTT
@@ -124,21 +125,21 @@
                     $6.8k\Omega$ & $600mV$ & $3.42V$ & $5.70$ & 0.53\% \\ \hline
                 \end{tabular}
             \end{table}
-            \begin{table}[H]
-                \centering
-                \caption{Forsterkningen for forskjellige verdier av $R_{18}$}
-                \label{tab:forsterkning_kollektormotstand_fake}
-                \begin{tabular}{|c|c|c|c|c|}
-                    \hline
-                    \rowcolor[gray]{0.9}
-                    \textbf{$R_{18}$} & \textbf{$V_i$ (Pk-Pk)} & \textbf{$V_o$ (Pk-Pk)} & \textbf{Forsterkning} & \textbf{Prosentvis avvik}\\ \hline
-                    $4.7k\Omega$ & $400mV$ & $1.54V$ & $3.86$ & 1.53\% \\ \hline
-                    $5.6k\Omega$ & $400mV$ & $1.87V$ & $4.67$ & 0\% \\ \hline
-                    $6.8k\Omega$ & $400mV$ & $2.28V$ & $5.70$ & 0.53\% \\ \hline
-                \end{tabular}
-            \end{table}
+            %\begin{table}[H]
+                %\centering
+                %\caption{Forsterkningen for forskjellige verdier av $R_{18}$}
+                %\label{tab:forsterkning_kollektormotstand_fake}
+                %\begin{tabular}{|c|c|c|c|c|}
+                    %\hline
+                    %\rowcolor[gray]{0.9}
+                    %\textbf{$R_{18}$} & \textbf{$V_i$ (Pk-Pk)} & \textbf{$V_o$ (Pk-Pk)} & \textbf{Forsterkning} & \textbf{Prosentvis avvik}\\ \hline
+                    %$4.7k\Omega$ & $400mV$ & $1.54V$ & $3.86$ & 1.53\% \\ \hline
+                   % $5.6k\Omega$ & $400mV$ & $1.87V$ & $4.67$ & 0\% \\ \hline
+                   % $6.8k\Omega$ & $400mV$ & $2.28V$ & $5.70$ & 0.53\% \\ \hline
+                %\end{tabular}
+            %\end{table}
 
-            I negativ halvperiode klippes signalet når $V_i \gtrsim 400mV$pp når $R_{18} = 5.6k\Omega$. Transistoren mettes og er ikke lenger i stand til å følge det påtrykte signalet fra $V_2$. For å kompensere for det klipte signalet er det nødvendig å anslå topp-til-topp spenningen ved å telle antall forventede ruter på den klipte kurven på  oscilloskopet for å kunne få et reelt estimat. 
+            I negativ halvperiode klippes signalet når $V_i \gtrsim 600mV$pp når $R_{18} = 5.6k\Omega$. Transistoren mettes og er ikke lenger i stand til å følge det påtrykte signalet fra $V_2$. For å kompensere for det klipte signalet er det nødvendig å anslå topp-til-topp spenningen ved å telle antall forventede ruter på den klipte kurven på  oscilloskopet for å kunne få et reelt estimat. 
 
         \subsubsection{Inngangsimpedans}
             Kretsen i figur \ref{fig:5} kobles opp, denne gang med en dekademotstand $R_{16}$ i serie med $V_2$. På denne måten er det mulig å måle inngangsimpedansen for transistorkretsen ved hjelp av halveringsmetoden.
@@ -164,7 +165,7 @@
                 \end{tabular}
             \end{table}
 
-            Fra tabell \ref{tab:inngangsimpedans1} ser man at når spenningen går fra $500mV$pp til $250mV$ppm, er $R_{16}$ lik $19k\Omega$. Dermed er utgangsimpedansen $Z_i$ til FE-forsterkeren lik $19k\Omega$. 
+            Fra tabell \ref{tab:inngangsimpedans1} ser man at når spenningen går fra $500mV$pp til $250mV$pp, er $R_{16}$ lik $19k\Omega$. Dermed er utgangsimpedansen $Z_i$ til FE-forsterkeren lik $19k\Omega$. 
 
         \subsubsection{Utgangsimpedans}
             For å måle utgangsimpedansen for kretsen i figur \ref{fig:6} benyttes igjen halveringsmetoden. Med oscilloskopet måles utgangen $V_o$ og dekademotstanden er stilt inn til sitt maksimum. Dekademotstanden skal reduseres gradvis helt til spenningen ved utgangen har blitt redusert til halvparten. Da vil dekademotstanden være omtrent lik utgangsimpedansen til FE-forsterkeren.
@@ -217,12 +218,12 @@
         \end{table}  
 
         Med en så lav inngangsspenning vil det være mye synlig støy i oscilloskopet. Dette kommer godt frem i figur \ref{fig:3}. Fra den samme figuren kan forsterkningen regnes ut. Fordi den gule kurven klippes, er det igjen nødvendig å legge til det komplette forventede sinussignalet. 
-        Det kommer til syne $7.00V$pp i oscilloskopet, men når man legger til $3V$ så fullfører man sinussignalet.
+        Det kommer til syne $7.00V$pp i oscilloskopet, noe som i utgangspunktet er feil. Det er derfor nødvendig å legge til $3V$ i negativ halvperiode.
 
         \begin{figure}[H]
             \centering
             \includegraphics[width=0.9\textwidth]{Media/3.jpeg}
-            \caption{$V_i$ og $V_o$ for tilhørende krets}
+            \caption{$V_i$ og $V_o$ for tilhørende krets} 
             \label{fig:3}
         \end{figure}
         
