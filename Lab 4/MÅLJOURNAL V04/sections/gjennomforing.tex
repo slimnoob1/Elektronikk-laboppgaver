@@ -189,7 +189,7 @@
                 \end{tabular}
             \end{table}           
             
-            Fra tabell \ref{tab:utgangsimpedans1} ser man at når utgangsspenningen går fra $300mV$pp til $150mV$ppm, er $R_{15}$ lik $5.1k\Omega$. Dermed er inngangsimpedansen $Z_o$ til FE-forsterkeren lik $5.1k\Omega$.
+            Fra tabell \ref{tab:utgangsimpedans1} ser man at når utgangsspenningen går fra $300mV$pp til $150mV$pp, er $R_{15}$ lik $5.1k\Omega$. Dermed er inngangsimpedansen $Z_o$ til FE-forsterkeren lik $5.1k\Omega$.
 
     \subsection{FE-forsterker med avkoblet emittermotstand}
         Kretsen i figur \ref{fig:7} ble koblet opp i henhold til koblingsskjemaet under. 
@@ -217,7 +217,7 @@
         \end{table}  
 
         Med en så lav inngangsspenning vil det være mye synlig støy i oscilloskopet. Dette kommer godt frem i figur \ref{fig:3}. Fra den samme figuren kan forsterkningen regnes ut. Fordi den gule kurven klippes, er det igjen nødvendig å legge til det komplette forventede sinussignalet. 
-        Det kommer til syne $7.00V$pp i oscilloskopet, men når man legger til $2.5V$ så fullfører man sinussignalet.
+        Det kommer til syne $7.00V$pp i oscilloskopet, men når man legger til $3V$ så fullfører man sinussignalet.
 
         \begin{figure}[H]
             \centering
@@ -235,23 +235,23 @@
                 \hline
                 \rowcolor[gray]{0.9}
                 \textbf{Målepunkt} & \textbf{Verdi} \\ \hline
-                $V_o$ & $7.00V (+ 2.5V)$ \\ \hline 
+                $V_o$ & $7.00V (+ 3V)$ \\ \hline 
                 $V_i$ & $30mV$ \\ \hline
             \end{tabular}
         \end{table}  
 
         Faseforsyvningen mellom inn- og utgangssignalet er $\ang{180}$. Forsterkningen i FE-forsterkeren vil da være lik:
         \begin{equation*}
-            A_V = \frac{12.5V}{30mV} = 500.
+            A_V = \frac{10V}{30mV} = 333.33.
         \end{equation*}
 
         Fra teorien tilsvarer det et prosentvis avvik på:
         \begin{equation*}
-            Avvik_{\%} = \left| \frac{500 - 531}{531} \right| \times 100\% = 5.84\%. 
+            Avvik_{\%} = \left| \frac{333.33 - 531}{531} \right| \times 100\% = 37.22\%. 
         \end{equation*}
 
-        Når $R_5$ forbigås av en kondensator, oppnås en betydelig høyere spenningsforsterkning sammenlignet med tilfellet der $R_5$ ikke er parallellkoblet med en kondensator. 
+        Til tross for det markante avviket fra teoretisk verdi, så kommer poenget frem med en kondensator i parallell med $R_5$. Når $R_5$ forbigås av en kondensator, oppnås en betydelig høyere spenningsforsterkning sammenlignet med tilfellet der $R_5$ ikke er parallellkoblet med en kondensator. 
 
-        Avviket skyldes at det er vanskelig å fastslå nøyaktig hvor mye spenning man faktisk må legge til for å fullføre signalet. $2.5V$ er kun et omtrentlig estimat, men nærme nok til å få frem poenget med forsterkning når emittermotstanden forbigås.
+        Avviket skyldes at det er vanskelig å fastslå nøyaktig hvor mye spenning man faktisk må legge til for å fullføre signalet. $3V$ er kun et grovt estimat, men nærme nok til å få frem poenget med forsterkning når emittermotstanden forbigås. 
         
         
